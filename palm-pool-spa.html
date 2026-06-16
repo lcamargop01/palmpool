@@ -2071,14 +2071,47 @@ function renderLogin() {
     signIn(SEED.users[0]);
   };
 }
+// ── Role-based view access ──────────────────────────────────────────────────
+// Each role lists ONLY the tabs it may see, in display order.
+const ALLOWED_VIEWS = {
+  pm:     [
+    { id: 'roadmap', label: 'Roadmap', icon: ICON.calendar },
+    { id: 'field',   label: 'Field',   icon: ICON.hardhat  },
+    { id: 'office',  label: 'Office',  icon: ICON.dashboard },
+  ],
+  crew:   [
+    { id: 'field',   label: 'Field',   icon: ICON.hardhat  },
+  ],
+  office: [
+    { id: 'roadmap', label: 'Roadmap', icon: ICON.calendar },
+    { id: 'office',  label: 'Office',  icon: ICON.dashboard },
+  ],
+  client: [
+    { id: 'client',  label: 'My Project', icon: ICON.user  },
+  ],
+  owner:  [
+    { id: 'roadmap', label: 'Roadmap', icon: ICON.calendar },
+    { id: 'field',   label: 'Field',   icon: ICON.hardhat  },
+    { id: 'office',  label: 'Office',  icon: ICON.dashboard },
+  ],
+};
+
+function allowedViewIds(role) {
+  return (ALLOWED_VIEWS[role] || ALLOWED_VIEWS.crew).map(v => v.id);
+}
+
 function signIn(user) {
   STATE.user = user;
   localStorage.setItem('palmpool_user', JSON.stringify(user));
-  // Pick default view based on role
+  // Pick default (first allowed) view based on role
+  const allowed = allowedViewIds(user.role);
   if (user.role === 'crew')        STATE.view = 'field';
-  else if (user.role === 'pm')     STATE.view = 'roadmap';   // PM lands on the master roadmap
+  else if (user.role === 'pm')     STATE.view = 'roadmap';
   else if (user.role === 'office') STATE.view = 'office';
   else if (user.role === 'client') STATE.view = 'client';
+  else if (user.role === 'owner')  STATE.view = 'roadmap';
+  // Safety: if stored view isn't allowed for this role, reset to first allowed
+  if (!allowed.includes(STATE.view)) STATE.view = allowed[0];
   renderApp();
 }
 function signOut() {
@@ -2110,10 +2143,9 @@ function renderApp() {
       </div>
 
       <div class="view-switcher">
-        <button class="view-tab ${STATE.view==='roadmap'?'active':''}" data-view="roadmap">${ICON.calendar}<span>Roadmap</span></button>
-        <button class="view-tab ${STATE.view==='field'?'active':''}" data-view="field">${ICON.hardhat}<span>Field</span></button>
-        <button class="view-tab ${STATE.view==='office'?'active':''}" data-view="office">${ICON.dashboard}<span>Office</span></button>
-        <button class="view-tab ${STATE.view==='client'?'active':''}" data-view="client">${ICON.user}<span>Client</span></button>
+        ${ALLOWED_VIEWS[STATE.user.role].map(v => `
+          <button class="view-tab ${STATE.view===v.id?'active':''}" data-view="${v.id}">${v.icon}<span>${v.label}</span></button>
+        `).join('')}
       </div>
 
       <div class="main" id="main"></div>
@@ -2122,7 +2154,13 @@ function renderApp() {
   app.appendChild(shell);
 
   shell.querySelectorAll('.view-tab').forEach(t => {
-    t.onclick = () => { STATE.view = t.dataset.view; STATE.jobDetail = null; renderApp(); };
+    t.onclick = () => {
+      const target = t.dataset.view;
+      if (!allowedViewIds(STATE.user.role).includes(target)) return; // guard
+      STATE.view = target;
+      STATE.jobDetail = null;
+      renderApp();
+    };
   });
   shell.querySelector('#userChip').onclick = () => {
     modal('Account', `
@@ -2143,9 +2181,12 @@ function renderApp() {
   shell.querySelector('#searchBtn').onclick  = () => toast('Search — coming soon');
   shell.querySelector('#notifyBtn').onclick  = () => renderAlertsModal();
 
-  // Render the chosen view
+  // Render the chosen view — enforce role access one final time
   const main = shell.querySelector('#main');
-  if (STATE.view === 'roadmap')      renderRoadmapView(main);
+  const allowed = allowedViewIds(STATE.user.role);
+  if (!allowed.includes(STATE.view)) STATE.view = allowed[0];
+
+  if      (STATE.view === 'roadmap') renderRoadmapView(main);
   else if (STATE.view === 'field')   renderFieldView(main);
   else if (STATE.view === 'office')  renderOfficeView(main);
   else                               renderClientView(main);
@@ -3555,10 +3596,16 @@ const savedUser = localStorage.getItem('palmpool_user');
 if (savedUser) {
   try {
     STATE.user = JSON.parse(savedUser);
-    if (STATE.user.role === 'crew') STATE.view = 'field';
-    else if (STATE.user.role === 'client') STATE.view = 'client';
-    else if (STATE.user.role === 'pm') STATE.view = 'roadmap';
-    else STATE.view = 'office';
+    // Restore default view for role, then clamp to allowed list
+    const role = STATE.user.role;
+    if (role === 'crew')        STATE.view = 'field';
+    else if (role === 'client') STATE.view = 'client';
+    else if (role === 'pm')     STATE.view = 'roadmap';
+    else if (role === 'owner')  STATE.view = 'roadmap';
+    else                        STATE.view = 'office';
+    // Final safety clamp — allowedViewIds is defined before this block runs
+    const ids = allowedViewIds(role);
+    if (!ids.includes(STATE.view)) STATE.view = ids[0];
     renderApp();
   } catch(e) { renderLogin(); }
 } else {
