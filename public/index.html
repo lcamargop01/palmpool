@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a2540">
+<title>AquaOps — Pool Operations Platform</title>
+<style>
+/* AquaOps — Pool Operations Platform
+   Professional SaaS styling, mobile-first */
+
+:root {
+  --navy-900: #0a2540;
+  --navy-800: #0f2f54;
+  --navy-700: #173d6b;
+  --pool-500: #0891b2;
+  --pool-400: #06b6d4;
+  --pool-300: #22d3ee;
+  --pool-100: #cffafe;
+  --pool-50: #ecfeff;
+  --sand-500: #d4a574;
+  --sand-100: #f5ede0;
+  --green-500: #10b981;
+  --green-100: #d1fae5;
+  --amber-500: #f59e0b;
+  --amber-100: #fef3c7;
+  --red-500: #ef4444;
+  --red-100: #fee2e2;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --gray-50: #f9fafb;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.06);
+  --shadow: 0 4px 12px rgba(10, 37, 64, 0.08);
+  --shadow-lg: 0 12px 32px rgba(10, 37, 64, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, textarea, select { font-family: inherit; }
+
+/* ============== LOGIN ============== */
+.login-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--navy-900) 0%, var(--pool-500) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.login-screen::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(34,211,238,0.15), transparent 70%);
+  top: -200px; right: -200px;
+  border-radius: 50%;
+}
+.login-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+}
+.login-logo {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.login-logo-mark {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--pool-400), var(--navy-800));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 20px;
+}
+.login-logo-text { font-size: 22px; font-weight: 800; color: var(--navy-900); letter-spacing: -0.5px; }
+.login-tagline { color: var(--gray-500); font-size: 14px; margin-bottom: 28px; }
+.login-card h2 { font-size: 20px; margin-bottom: 20px; color: var(--gray-900); }
+.input-group { margin-bottom: 16px; }
+.input-group label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--gray-700); margin-bottom: 6px;
+}
+.input-group input {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px; font-size: 15px;
+  transition: border-color 0.15s;
+}
+.input-group input:focus { outline: none; border-color: var(--pool-400); }
+.login-btn {
+  width: 100%; padding: 13px;
+  background: var(--navy-900);
+  color: white; font-weight: 600; font-size: 15px;
+  border-radius: 10px;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+.login-btn:hover { background: var(--navy-800); }
+.demo-accounts {
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--gray-200);
+}
+.demo-accounts-title {
+  font-size: 11px; font-weight: 600;
+  color: var(--gray-500); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 10px;
+}
+.demo-account {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; background: var(--gray-50);
+  border-radius: 8px; margin-bottom: 6px;
+  cursor: pointer; transition: background 0.15s;
+}
+.demo-account:hover { background: var(--pool-50); }
+.demo-account-info { display: flex; align-items: center; gap: 10px; }
+.demo-account-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--pool-400); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 13px;
+}
+.demo-account-name { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.demo-account-role { font-size: 11px; color: var(--gray-500); }
+
+/* ============== APP SHELL ============== */
+.app-shell { display: flex; flex-direction: column; min-height: 100vh; background: var(--gray-50); }
+
+.top-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.top-bar-left { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--pool-400), var(--navy-800));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 14px;
+}
+.brand-text { font-size: 17px; font-weight: 800; color: var(--navy-900); letter-spacing: -0.3px; }
+.top-bar-right { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: 8px; display: flex;
+  align-items: center; justify-content: center;
+  color: var(--gray-600); position: relative;
+}
+.icon-btn:hover { background: var(--gray-100); }
+.icon-btn .badge {
+  position: absolute; top: 4px; right: 4px;
+  width: 8px; height: 8px; background: var(--red-500);
+  border-radius: 50%; border: 2px solid white;
+}
+.user-chip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 10px 4px 4px;
+  background: var(--gray-100); border-radius: 100px;
+  cursor: pointer;
+}
+.user-chip-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--pool-400); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 12px;
+}
+.user-chip-name { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+
+/* View switcher (demo control) */
+.view-switcher {
+  background: var(--navy-900);
+  padding: 8px 12px;
+  display: flex; gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.view-switcher::-webkit-scrollbar { display: none; }
+.view-tab {
+  padding: 8px 14px;
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px; font-weight: 600;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.15s;
+  display: flex; align-items: center; gap: 6px;
+}
+.view-tab.active {
+  background: var(--pool-400);
+  color: white;
+}
+.view-tab:not(.active):hover { background: rgba(255,255,255,0.1); color: white; }
+
+/* Main content */
+.main { flex: 1; padding: 16px; max-width: 1400px; width: 100%; margin: 0 auto; }
+
+/* ============== FIELD VIEW ============== */
+.field-header {
+  background: linear-gradient(135deg, var(--navy-900), var(--pool-500));
+  color: white;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.field-header::after {
+  content: ''; position: absolute;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+  bottom: -100px; right: -50px;
+  border-radius: 50%;
+}
+.field-greeting { font-size: 13px; opacity: 0.85; margin-bottom: 4px; }
+.field-name { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+.field-stats { display: flex; gap: 16px; position: relative; z-index: 1; }
+.field-stat { flex: 1; }
+.field-stat-num { font-size: 24px; font-weight: 800; }
+.field-stat-label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+.field-clock {
+  position: absolute; top: 20px; right: 20px;
+  z-index: 1;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 8px 14px; border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.clock-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green-500);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.section-title {
+  font-size: 12px; font-weight: 700;
+  color: var(--gray-500); text-transform: uppercase;
+  letter-spacing: 0.8px; margin: 20px 0 10px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.section-title .link {
+  color: var(--pool-500); font-size: 12px;
+  text-transform: none; letter-spacing: 0;
+  font-weight: 600; cursor: pointer;
+}
+
+.job-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.job-card:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+.job-card.active { border-left: 4px solid var(--pool-500); padding-left: 12px; }
+.job-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 8px;
+}
+.job-card-type {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 8px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.job-type-construction { background: var(--sand-100); color: #8b5a2b; }
+.job-type-cleaning { background: var(--pool-100); color: var(--navy-800); }
+.job-type-repair { background: var(--amber-100); color: #92400e; }
+.job-time { font-size: 12px; color: var(--gray-500); font-weight: 600; }
+.job-client { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+.job-address { font-size: 13px; color: var(--gray-500); display: flex; align-items: center; gap: 4px; }
+.job-progress {
+  margin-top: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.progress-bar {
+  flex: 1; height: 6px;
+  background: var(--gray-200);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pool-400), var(--pool-500));
+  border-radius: 100px;
+  transition: width 0.3s;
+}
+.progress-text { font-size: 12px; font-weight: 600; color: var(--gray-700); }
+
+/* Job detail */
+.job-detail-header {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; color: var(--pool-500); font-weight: 600;
+  margin-bottom: 12px;
+}
+.checklist {
+  background: white; border-radius: var(--radius);
+  padding: 16px; margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.checklist-title {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 12px; color: var(--gray-900);
+}
+.checklist-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checkbox {
+  width: 22px; height: 22px;
+  border: 2px solid var(--gray-300);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.checkbox.checked {
+  background: var(--green-500);
+  border-color: var(--green-500);
+}
+.checkbox.checked::after {
+  content: '✓'; color: white; font-weight: 700; font-size: 13px;
+}
+.checklist-text { flex: 1; font-size: 14px; }
+.checklist-text.done { text-decoration: line-through; color: var(--gray-400); }
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.action-tile {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.action-tile:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+.action-tile-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--pool-100);
+  color: var(--pool-500);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.action-tile-label {
+  font-size: 14px; font-weight: 600; color: var(--gray-900);
+  margin-bottom: 2px;
+}
+.action-tile-sub { font-size: 11px; color: var(--gray-500); }
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.photo-thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: var(--gray-200);
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-400);
+}
+.photo-add {
+  background: var(--pool-50);
+  border: 2px dashed var(--pool-300);
+  color: var(--pool-500);
+}
+
+/* ============== OFFICE VIEW ============== */
+.office-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 768px) {
+  .office-grid { grid-template-columns: 2fr 1fr; }
+}
+@media (min-width: 1100px) {
+  .office-grid { grid-template-columns: 2fr 1.2fr; }
+}
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (min-width: 640px) {
+  .kpi-row { grid-template-columns: repeat(4, 1fr); }
+}
+.kpi-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+.kpi-label { font-size: 11px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.kpi-value { font-size: 24px; font-weight: 800; color: var(--gray-900); line-height: 1; }
+.kpi-delta { font-size: 11px; margin-top: 6px; font-weight: 600; display: flex; align-items: center; gap: 3px; }
+.delta-up { color: var(--green-500); }
+.delta-down { color: var(--red-500); }
+
+.panel {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  margin-bottom: 14px;
+}
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.panel-title { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+.panel-action {
+  font-size: 12px; color: var(--pool-500); font-weight: 600; cursor: pointer;
+}
+
+.dispatch-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+.dispatch-row:last-child { border-bottom: none; }
+.dispatch-time {
+  font-size: 12px; font-weight: 700; color: var(--gray-700);
+  background: var(--gray-100);
+  padding: 6px 8px; border-radius: 8px;
+  min-width: 56px; text-align: center;
+}
+.dispatch-info { flex: 1; min-width: 0; }
+.dispatch-client { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.dispatch-meta { font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center; }
+.dispatch-status {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 8px; border-radius: 100px;
+}
+.status-scheduled { background: var(--gray-100); color: var(--gray-700); }
+.status-enroute { background: var(--amber-100); color: #92400e; }
+.status-onsite { background: var(--pool-100); color: var(--navy-800); }
+.status-complete { background: var(--green-100); color: #065f46; }
+
+.alert-item {
+  display: flex; gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.alert-low { background: var(--amber-100); }
+.alert-critical { background: var(--red-100); }
+.alert-info { background: var(--pool-100); }
+.alert-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.alert-low .alert-icon { background: var(--amber-500); color: white; }
+.alert-critical .alert-icon { background: var(--red-500); color: white; }
+.alert-info .alert-icon { background: var(--pool-500); color: white; }
+.alert-content { flex: 1; }
+.alert-title { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.alert-desc { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+
+.crew-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+.crew-row:last-child { border-bottom: none; }
+.crew-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--pool-400); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 13px;
+}
+.crew-info { flex: 1; }
+.crew-name { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.crew-job { font-size: 12px; color: var(--gray-500); }
+.crew-status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.crew-active { background: var(--green-500); }
+.crew-idle { background: var(--gray-300); }
+.crew-offline { background: var(--gray-400); }
+
+.map-wrap {
+  background: linear-gradient(135deg, #e0f2fe 0%, #cffafe 100%);
+  border-radius: var(--radius);
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.map-pin {
+  position: absolute;
+  width: 28px; height: 28px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.map-pin span { transform: rotate(45deg); }
+.map-pin.pool { background: var(--pool-500); }
+.map-pin.construction { background: var(--sand-500); }
+.map-pin.cleaning { background: var(--green-500); }
+.map-grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.map-legend {
+  position: absolute;
+  bottom: 12px; left: 12px;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  box-shadow: var(--shadow);
+}
+.map-legend-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ============== CLIENT VIEW ============== */
+.client-hero {
+  background: linear-gradient(135deg, var(--navy-900), var(--pool-500));
+  color: white;
+  padding: 24px 20px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+}
+.client-hero-label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; }
+.client-hero-name { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+.client-progress {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 14px;
+}
+.client-progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; opacity: 0.9; margin-bottom: 8px;
+}
+.client-progress-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.client-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 100px;
+}
+.client-next {
+  font-size: 14px; font-weight: 600;
+}
+
+.milestone-timeline {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 14px;
+}
+.milestone {
+  display: flex; gap: 14px;
+  position: relative;
+  padding-bottom: 18px;
+}
+.milestone:last-child { padding-bottom: 0; }
+.milestone::before {
+  content: '';
+  position: absolute;
+  left: 13px; top: 28px; bottom: -4px;
+  width: 2px;
+  background: var(--gray-200);
+}
+.milestone:last-child::before { display: none; }
+.milestone-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: var(--gray-200);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1;
+  position: relative;
+}
+.milestone.done .milestone-dot { background: var(--green-500); }
+.milestone.done .milestone-dot::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+.milestone.current .milestone-dot {
+  background: var(--pool-400);
+  box-shadow: 0 0 0 4px var(--pool-100);
+  animation: pulse-ring 2s infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 4px var(--pool-100); }
+  50% { box-shadow: 0 0 0 8px var(--pool-100); }
+}
+.milestone-content { flex: 1; padding-top: 2px; }
+.milestone-title { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.milestone-date { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+.milestone-desc { font-size: 13px; color: var(--gray-600); margin-top: 6px; }
+
+.update-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 10px;
+  border: 1px solid var(--gray-200);
+}
+.update-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.update-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--navy-700); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 12px;
+}
+.update-meta { flex: 1; }
+.update-author { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.update-time { font-size: 11px; color: var(--gray-500); }
+.update-message { font-size: 14px; color: var(--gray-800); line-height: 1.5; }
+
+.contact-bar {
+  background: white;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex; gap: 10px;
+}
+.contact-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--pool-50);
+  color: var(--pool-500);
+  font-weight: 600; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--pool-100);
+}
+.contact-btn:hover { background: var(--pool-100); }
+
+/* ============== INVENTORY (sub-section) ============== */
+.inv-list { display: flex; flex-direction: column; gap: 8px; }
+.inv-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  background: var(--gray-50);
+  border-radius: 10px;
+}
+.inv-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--pool-100);
+  color: var(--pool-500);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.inv-info { flex: 1; min-width: 0; }
+.inv-name { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.inv-meta { font-size: 12px; color: var(--gray-500); }
+.inv-bar {
+  width: 80px; height: 6px;
+  background: var(--gray-200);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.inv-bar-fill { height: 100%; border-radius: 100px; }
+.inv-bar-ok { background: var(--green-500); }
+.inv-bar-low { background: var(--amber-500); }
+.inv-bar-crit { background: var(--red-500); }
+.inv-qty { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+
+/* ============== MESSAGES ============== */
+.msg-thread {
+  background: white;
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex; gap: 10px;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+}
+.msg-thread:hover { border-color: var(--pool-300); }
+.msg-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--navy-700); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px;
+  flex-shrink: 0;
+}
+.msg-content { flex: 1; min-width: 0; }
+.msg-header-row { display: flex; justify-content: space-between; align-items: center; }
+.msg-name { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.msg-time { font-size: 11px; color: var(--gray-500); }
+.msg-preview {
+  font-size: 13px; color: var(--gray-600);
+  overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.msg-unread {
+  width: 8px; height: 8px;
+  background: var(--pool-500);
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+/* ============== MODAL ============== */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10, 37, 64, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  animation: fadeIn 0.15s;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: white;
+  border-radius: var(--radius-lg);
+  max-width: 480px; width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  animation: slideUp 0.2s;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--gray-900); margin-bottom: 16px;
+}
+.modal-actions {
+  display: flex; gap: 10px;
+  margin-top: 20px;
+}
+.btn-primary {
+  flex: 1; padding: 12px;
+  background: var(--navy-900); color: white;
+  border-radius: 10px; font-weight: 600; font-size: 14px;
+}
+.btn-secondary {
+  flex: 1; padding: 12px;
+  background: var(--gray-100); color: var(--gray-700);
+  border-radius: 10px; font-weight: 600; font-size: 14px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy-900);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  animation: toastIn 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+@keyframes toastIn {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Bottom nav (mobile field) */
+.bottom-nav {
+  display: none;
+  position: sticky; bottom: 0;
+  background: white;
+  border-top: 1px solid var(--gray-200);
+  padding: 8px 0 12px;
+  justify-content: space-around;
+  z-index: 40;
+}
+.bottom-nav.show { display: flex; }
+.nav-btn {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 2px;
+  padding: 6px 12px;
+  color: var(--gray-500);
+  font-size: 10px; font-weight: 600;
+}
+.nav-btn.active { color: var(--pool-500); }
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* SVG icons inline sizing */
+.icon { width: 18px; height: 18px; stroke-width: 2; }
+.icon-sm { width: 14px; height: 14px; stroke-width: 2; }
+.icon-lg { width: 22px; height: 22px; stroke-width: 2; }
+
+/* ============== PALM POOL & SPA — CUSTOM STYLES ============== */
+.pm-contact-card {
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.pm-contact-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.doc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.doc-row:hover { background: var(--pool-50); }
+.field-docs-notice {
+  background: var(--pool-50);
+  border: 1px solid var(--pool-100);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--pool-500);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+/* ============== ROADMAP (Gantt) ============== */
+.roadmap-wrap {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.roadmap-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--gray-100);
+  gap: 12px; flex-wrap: wrap;
+}
+.roadmap-title-block { flex: 1; min-width: 200px; }
+.roadmap-title { font-size: 17px; font-weight: 700; color: var(--gray-900); }
+.roadmap-subtitle { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+.roadmap-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.zoom-group {
+  display: inline-flex; background: var(--gray-100);
+  border-radius: 8px; padding: 3px;
+}
+.zoom-btn {
+  padding: 6px 12px; font-size: 12px; font-weight: 600;
+  color: var(--gray-600); border-radius: 6px;
+}
+.zoom-btn.active { background: white; color: var(--navy-900); box-shadow: var(--shadow-sm); }
+.nav-btn-pill {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.nav-btn-pill:hover { background: var(--gray-200); }
+.today-btn {
+  padding: 6px 12px;
+  background: var(--navy-900); color: white;
+  font-size: 12px; font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Legend */
+.roadmap-legend {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  padding: 10px 18px;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 11px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: var(--gray-600); }
+.legend-swatch { width: 14px; height: 8px; border-radius: 3px; }
+.legend-marker {
+  width: 12px; height: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px;
+}
+
+/* Scrollable gantt body */
+.roadmap-body {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+.roadmap-body::-webkit-scrollbar { height: 10px; }
+.roadmap-body::-webkit-scrollbar-track { background: var(--gray-50); }
+.roadmap-body::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 100px; }
+
+.gantt-grid {
+  display: grid;
+  /* set by JS: grid-template-columns */
+  position: relative;
+  min-width: 100%;
+}
+
+/* Sticky left column for labels */
+.gantt-label-col {
+  position: sticky; left: 0;
+  background: white;
+  z-index: 2;
+  border-right: 1px solid var(--gray-200);
+  box-shadow: 2px 0 4px rgba(0,0,0,0.04);
+}
+
+/* Header row (dates) */
+.gantt-date-cell {
+  font-size: 10px;
+  text-align: center;
+  color: var(--gray-500);
+  font-weight: 600;
+  padding: 8px 2px;
+  border-right: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.gantt-date-cell.weekend { background: #f0f4f8; }
+.gantt-date-cell.today {
+  background: var(--pool-100);
+  color: var(--pool-500);
+  font-weight: 800;
+}
+.gantt-date-day { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+.gantt-date-month { font-size: 9px; color: var(--gray-400); text-transform: uppercase; }
+
+/* Job rows */
+.gantt-row {
+  display: contents;
+}
+.gantt-row-label {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  background: white;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  min-height: 52px;
+}
+.gantt-row-label.section-label {
+  background: var(--navy-900);
+  color: white;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 6px 14px;
+  min-height: auto;
+}
+.gantt-row-section-cell {
+  background: var(--navy-900);
+  border-bottom: 1px solid var(--navy-800);
+  border-right: 1px solid var(--navy-800);
+}
+.gantt-row-job-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.gantt-row-job-sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.gantt-row-sublabel {
+  padding: 8px 14px 8px 28px;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--gray-50);
+  font-size: 11px;
+  color: var(--gray-600);
+  display: flex; align-items: center;
+  min-height: 36px;
+  font-weight: 600;
+}
+
+/* Day cell (track) */
+.gantt-cell {
+  border-right: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-100);
+  position: relative;
+  min-height: 52px;
+}
+.gantt-cell.weekend { background: rgba(8, 145, 178, 0.025); }
+.gantt-cell.today { background: rgba(8, 145, 178, 0.06); }
+.gantt-cell.sub { min-height: 36px; }
+
+/* Today vertical line */
+.today-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--pool-500);
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(8, 145, 178, 0.4);
+}
+.today-line::before {
+  content: 'TODAY';
+  position: absolute;
+  top: 4px; left: 4px;
+  background: var(--pool-500); color: white;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+/* Phase bars */
+.phase-bar {
+  position: absolute;
+  top: 10px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center;
+  padding: 0 10px;
+  font-size: 11px; font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 4px rgba(10, 37, 64, 0.15);
+}
+.phase-bar:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(10, 37, 64, 0.25); z-index: 5; }
+.phase-excavation   { background: linear-gradient(90deg, #a16207, #ca8a04); }
+.phase-steel        { background: linear-gradient(90deg, #475569, #64748b); }
+.phase-gunite       { background: linear-gradient(90deg, #b45309, #d97706); }
+.phase-cure         { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+.phase-tile         { background: linear-gradient(90deg, var(--pool-500), var(--pool-400)); }
+.phase-plaster      { background: linear-gradient(90deg, #0e7490, #0891b2); }
+.phase-handoff      { background: linear-gradient(90deg, #047857, #10b981); }
+.phase-inspection   { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+.phase-repair       { background: linear-gradient(90deg, #be123c, #e11d48); }
+.phase-default      { background: linear-gradient(90deg, var(--navy-800), var(--navy-700)); }
+.phase-bar.done { opacity: 0.55; }
+.phase-bar.active {
+  outline: 2px solid white;
+  outline-offset: -2px;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.3), 0 2px 4px rgba(10, 37, 64, 0.15);
+}
+
+/* Markers for deliveries / equipment / inspections (on sub-rows) */
+.gantt-marker {
+  position: absolute;
+  top: 6px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 2;
+  transform: translateX(-50%);
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.gantt-marker:hover { transform: translateX(-50%) scale(1.2); z-index: 6; }
+.marker-delivery   { background: var(--green-500); }
+.marker-equipment  { background: var(--navy-700); border-radius: 6px; }
+.marker-inspection { background: #7c3aed; }
+.marker-service    { background: var(--amber-500); }
+.marker-conflict {
+  background: var(--red-500);
+  animation: conflict-pulse 1.5s infinite;
+}
+@keyframes conflict-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+/* KPI strip above roadmap */
+.roadmap-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--gray-50);
+}
+@media (min-width: 640px) {
+  .roadmap-kpi-strip { grid-template-columns: repeat(4, 1fr); }
+}
+.rk-card { background: white; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--gray-200); }
+.rk-label { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.rk-value { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-top: 2px; }
+.rk-sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.rk-card.danger .rk-value { color: var(--red-500); }
+.rk-card.warn .rk-value { color: var(--amber-500); }
+
+/* Up-next list (alongside roadmap on desktop) */
+.upnext-list { padding: 4px 0; }
+.upnext-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+.upnext-item:hover { background: var(--gray-50); }
+.upnext-date {
+  flex-shrink: 0;
+  width: 44px; text-align: center;
+  background: var(--gray-100);
+  border-radius: 8px;
+  padding: 4px;
+}
+.upnext-date-day { font-size: 16px; font-weight: 800; color: var(--gray-900); line-height: 1; }
+.upnext-date-month { font-size: 9px; color: var(--gray-500); text-transform: uppercase; font-weight: 700; }
+.upnext-info { flex: 1; min-width: 0; }
+.upnext-item-title { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.upnext-item-sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.upnext-icon {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: white;
+  flex-shrink: 0;
+}
+.upnext-conflict-banner {
+  background: var(--red-100);
+  border-left: 3px solid var(--red-500);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #991b1b;
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 600;
+}
+
+/* ============== EQUIPMENT ============== */
+.eq-summary-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.eq-summary-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+.eq-summary-num { font-size: 20px; font-weight: 800; color: var(--gray-900); }
+.eq-summary-label { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+.eq-summary-card.alert { background: var(--red-100); border-color: var(--red-100); }
+.eq-summary-card.alert .eq-summary-num { color: var(--red-500); }
+.eq-summary-card.warn { background: var(--amber-100); border-color: var(--amber-100); }
+.eq-summary-card.warn .eq-summary-num { color: #92400e; }
+
+.eq-filter-row {
+  display: flex; gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 12px;
+  padding-bottom: 4px;
+}
+.eq-filter-row::-webkit-scrollbar { display: none; }
+.eq-filter-chip {
+  padding: 6px 12px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 100px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.eq-filter-chip.active {
+  background: var(--navy-900);
+  color: white;
+}
+
+.eq-list { display: flex; flex-direction: column; gap: 10px; }
+.eq-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.eq-card:hover { box-shadow: var(--shadow); border-color: var(--pool-300); }
+.eq-card.has-conflict { border-left: 4px solid var(--red-500); padding-left: 10px; }
+.eq-card-top {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 10px;
+}
+.eq-icon-tile {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.eq-icon-heavy   { background: var(--sand-100); color: #8b5a2b; }
+.eq-icon-vehicle { background: var(--pool-100); color: var(--navy-800); }
+.eq-icon-tool    { background: var(--green-100); color: #065f46; }
+.eq-info { flex: 1; min-width: 0; }
+.eq-name { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+.eq-model { font-size: 12px; color: var(--gray-500); }
+.eq-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  background: var(--gray-100); color: var(--gray-700);
+  padding: 2px 6px; border-radius: 4px;
+  margin-top: 4px; letter-spacing: 0.5px;
+}
+.eq-status-pill {
+  font-size: 10px; font-weight: 700;
+  padding: 4px 8px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.eq-status-in-use      { background: var(--pool-100); color: var(--navy-800); }
+.eq-status-idle        { background: var(--gray-100); color: var(--gray-600); }
+.eq-status-maintenance { background: var(--amber-100); color: #92400e; }
+.eq-status-transit     { background: var(--green-100); color: #065f46; }
+
+.eq-detail-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--gray-600);
+  margin-bottom: 4px;
+}
+.eq-detail-row .icon-sm { color: var(--gray-400); }
+.eq-detail-row strong { color: var(--gray-800); font-weight: 600; }
+
+.eq-next-block {
+  margin-top: 10px;
+  padding: 10px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  border-left: 3px solid var(--pool-400);
+}
+.eq-next-label {
+  font-size: 10px; font-weight: 700;
+  color: var(--gray-500); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 4px;
+}
+.eq-next-job { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.eq-next-meta { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+.eq-conflict-banner {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: var(--red-100);
+  color: #991b1b;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.eq-service-banner {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: var(--amber-100);
+  color: #92400e;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.eq-progress-mini {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--gray-500);
+}
+.eq-progress-mini .progress-bar { height: 4px; }
+
+/* Field view: equipment assigned to me */
+.my-eq-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 12px;
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px;
+}
+.my-eq-card .eq-icon-tile { width: 38px; height: 38px; font-size: 18px; }
+.my-eq-info { flex: 1; min-width: 0; }
+.my-eq-name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.my-eq-tag { font-size: 11px; color: var(--gray-500); }
+.my-eq-btn {
+  padding: 6px 12px;
+  background: var(--pool-50);
+  color: var(--pool-500);
+  font-weight: 600; font-size: 12px;
+  border-radius: 8px;
+}
+.my-eq-btn.checked-out {
+  background: var(--green-100);
+  color: #065f46;
+}
+
+/* Equipment map pin */
+.map-pin.equipment-pin {
+  background: var(--navy-700);
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  transform: none;
+  font-size: 12px;
+}
+.map-pin.equipment-pin span { transform: none; }
+
+/* Utility */
+.text-center { text-align: center; }
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 14px;
+}
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* Palm Pool & Spa — Realistic Pool Industry Seed Data */
+
+const SEED_VERSION = 5; // bump to force-refresh seed in returning demos
+
+const SEED = {
+  version: 5,
+  // Project Managers for client contact
+  projectManagers: [
+    { id: 'pm1', name: 'Jose Garcia',   initials: 'JG', title: 'Project Manager',    phone: '(772) 555-0148', role: 'pm',    email: 'jose@palmpoolspa.com' },
+    { id: 'pm2', name: 'Marcus Reyes',  initials: 'MR', title: 'Project Manager',    phone: '(772) 555-0192', role: 'pm',    email: 'marcus@palmpoolspa.com' },
+    { id: 'pm3', name: 'David Palmer',  initials: 'DP', title: 'Owner / Escalation', phone: '(772) 555-0100', role: 'owner', email: 'david@palmpoolspa.com' },
+  ],
+  users: [
+    { id: 'u1', name: 'Jose Garcia',     role: 'pm',     initials: 'JG', email: 'jose@palmpoolspa.com' },
+    { id: 'u2', name: 'Marcus Reyes',    role: 'pm',     initials: 'MR', email: 'marcus@palmpoolspa.com' },
+    { id: 'u3', name: 'Carlos Mendez',   role: 'crew',   initials: 'CM', email: 'carlos@palmpoolspa.com',  crew: 'Construction A' },
+    { id: 'u4', name: 'Tony Bautista',   role: 'crew',   initials: 'TB', email: 'tony@palmpoolspa.com',    crew: 'Construction B' },
+    { id: 'u5', name: 'Pat Wilson',      role: 'office', initials: 'PW', email: 'pat@palmpoolspa.com' },
+    { id: 'u6', name: 'The Hendersons',  role: 'client', initials: 'H',  email: 'henderson@demo.com', jobId: 'j1' },
+  ],
+
+  crews: [
+    { id: 'c1', name: 'Construction A', members: ['Carlos M.', 'Diego L.', 'Sam K.'],  status: 'active',  currentJob: 'j1' },
+    { id: 'c2', name: 'Construction B', members: ['Tony B.', 'Will P.'],               status: 'active',  currentJob: 'j2' },
+    { id: 'c3', name: 'Cleaning Rt 1',  members: ['Rosa M.'],                          status: 'active',  currentJob: 'j3' },
+    { id: 'c4', name: 'Cleaning Rt 2',  members: ['Jordan T.'],                        status: 'idle',    currentJob: null },
+    { id: 'c5', name: 'Repair Team',    members: ['Eli H.', 'Manny R.'],               status: 'active',  currentJob: 'j7' },
+  ],
+
+  jobs: [
+    {
+      id: 'j1',
+      client: 'The Hendersons',
+      address: '14 Magnolia Court, Westlake',
+      type: 'construction',
+      service: 'New Pool Build — Gunite Shell',
+      startDate: '2026-05-02',
+      endDate: '2026-07-15',
+      progress: 62,
+      crew: 'Construction A',
+      status: 'onsite',
+      scheduledTime: '7:30 AM',
+      lat: 38, lng: 42,
+      value: 78500,
+      checklist: [
+        { id: 't1', text: 'Confirm gunite delivery (8:00 AM)', done: true },
+        { id: 't2', text: 'Set rebar tie spacing per plan',     done: true },
+        { id: 't3', text: 'Pre-shoot inspection — plumbing',    done: true },
+        { id: 't4', text: 'Apply gunite — shallow end',         done: false },
+        { id: 't5', text: 'Apply gunite — deep end & walls',    done: false },
+        { id: 't6', text: 'Float and trowel finish',            done: false },
+        { id: 't7', text: 'Photos: shell complete + close-ups', done: false },
+        { id: 't8', text: 'Hose down — 7-day cure starts',      done: false },
+      ],
+      milestones: [
+        { title: 'Permits & Excavation',  date: 'May 2 – May 9',     done: true,    desc: 'Site cleared, dig complete, permits filed and approved.' },
+        { title: 'Steel & Plumbing',      date: 'May 12 – May 22',   done: true,    desc: 'Rebar shell tied. Plumbing roughed in and pressure-tested.' },
+        { title: 'Gunite Shell',          date: 'Jun 8 – Jun 12',    current: true, desc: 'Gunite application this week. 7-day cure period to follow.' },
+        { title: 'Tile & Coping',         date: 'Jun 22 – Jul 1',    desc: 'Waterline tile installation and coping stones.' },
+        { title: 'Plaster & Fill',        date: 'Jul 6 – Jul 10',    desc: 'Final plaster coat, then begin filling pool.' },
+        { title: 'Startup & Handoff',     date: 'Jul 13 – Jul 15',   desc: 'Chemistry balance, equipment walkthrough, client handoff.' },
+      ],
+      photos: 24,
+      updates: [
+        { author: 'Jose Garcia', initials: 'JG', time: '2 hours ago', message: 'Gunite truck confirmed for 8:00 AM Tuesday. Crew will be on-site at 7:30 to prep. Weather looks clear all week.' },
+        { author: 'Marcus Reyes', initials: 'MR', time: 'Yesterday',  message: 'Pressure test on plumbing came back clean. Photos uploaded. Ready for inspection sign-off.' },
+        { author: 'Pat Wilson',   initials: 'PW', time: '3 days ago', message: 'Permit approval came through this morning. We are clear to proceed with gunite next week.' },
+      ],
+    },
+    {
+      id: 'j2',
+      client: 'Ramirez Family',
+      address: '208 Cedar Ridge Dr, Eastbrook',
+      type: 'construction',
+      service: 'Pool Build — Tile & Coping',
+      startDate: '2026-03-15',
+      endDate: '2026-06-30',
+      progress: 85,
+      crew: 'Construction B',
+      status: 'enroute',
+      scheduledTime: '8:00 AM',
+      lat: 55, lng: 28,
+      value: 92000,
+      checklist: [
+        { id: 't1', text: 'Stage tile pallets at site',         done: true },
+        { id: 't2', text: 'Layout dry-run waterline tile',      done: true },
+        { id: 't3', text: 'Set first row coping (south wall)',  done: false },
+        { id: 't4', text: 'Continue coping — east + north',     done: false },
+        { id: 't5', text: 'Grout waterline tile',               done: false },
+      ],
+    },
+    {
+      id: 'j3',
+      client: 'Sunset Villas HOA',
+      address: '900 Sunset Blvd (Community Pool)',
+      type: 'cleaning',
+      service: 'Weekly Service — Commercial',
+      progress: 100,
+      crew: 'Cleaning Rt 1',
+      status: 'onsite',
+      scheduledTime: '6:00 AM',
+      lat: 22, lng: 65,
+      value: 480,
+      checklist: [
+        { id: 't1', text: 'Skim surface + empty baskets',       done: true },
+        { id: 't2', text: 'Brush walls and waterline tile',     done: true },
+        { id: 't3', text: 'Vacuum floor',                        done: true },
+        { id: 't4', text: 'Test water — pH, Cl, Alk, CYA',      done: true },
+        { id: 't5', text: 'Add chemicals per reading',          done: false },
+        { id: 't6', text: 'Backwash filter (if PSI > 25)',      done: false },
+        { id: 't7', text: 'Photo: clean pool + chemical log',   done: false },
+      ],
+      lastReading: { ph: 7.4, cl: 2.8, alk: 110, cya: 45, tds: 1200 },
+    },
+    {
+      id: 'j4',
+      client: 'Okonkwo Residence',
+      address: '47 Birchwood Ln, Westlake',
+      type: 'cleaning',
+      service: 'Weekly Service — Residential',
+      progress: 0,
+      crew: 'Cleaning Rt 1',
+      status: 'scheduled',
+      scheduledTime: '9:30 AM',
+      lat: 35, lng: 60,
+      value: 145,
+    },
+    {
+      id: 'j5',
+      client: 'Greene Family',
+      address: '12 Lakeview Terrace',
+      type: 'cleaning',
+      service: 'Weekly Service — Residential',
+      progress: 0,
+      crew: 'Cleaning Rt 1',
+      status: 'scheduled',
+      scheduledTime: '11:00 AM',
+      lat: 48, lng: 72,
+      value: 135,
+    },
+    {
+      id: 'j6',
+      client: 'Patel Residence',
+      address: '301 Oakmont Way',
+      type: 'cleaning',
+      service: 'Weekly Service — Residential',
+      progress: 0,
+      crew: 'Cleaning Rt 1',
+      status: 'scheduled',
+      scheduledTime: '1:00 PM',
+      lat: 60, lng: 80,
+      value: 145,
+    },
+    {
+      id: 'j8',
+      client: 'Westwood Residence',
+      address: '88 Crestview Drive, Westlake',
+      type: 'construction',
+      service: 'New Pool Build — Excavation & Steel',
+      startDate: '2026-06-22',
+      endDate: '2026-08-19',
+      progress: 0,
+      crew: 'Construction B',
+      status: 'scheduled',
+      scheduledTime: '7:00 AM',
+      lat: 65, lng: 18,
+      value: 84000,
+    },
+    {
+      id: 'j7',
+      client: 'The Liu Estate',
+      address: '5 Hilltop Drive',
+      type: 'repair',
+      service: 'Pump Replacement + Heater Diagnostic',
+      progress: 40,
+      crew: 'Repair Team',
+      status: 'onsite',
+      scheduledTime: '10:00 AM',
+      lat: 70, lng: 35,
+      value: 2850,
+      checklist: [
+        { id: 't1', text: 'Diagnose old pump (failed bearing)',  done: true },
+        { id: 't2', text: 'Shut off power + drain lines',        done: true },
+        { id: 't3', text: 'Install new variable-speed pump',     done: false },
+        { id: 't4', text: 'Heater diagnostic — ignition module', done: false },
+      ],
+    },
+  ],
+
+  inventory: [
+    { id: 'i1', name: 'Liquid Chlorine (12.5%)', category: 'Chemical', qty: 8,  unit: 'gal', min: 20, status: 'critical' },
+    { id: 'i2', name: 'Muriatic Acid',           category: 'Chemical', qty: 14, unit: 'gal', min: 12, status: 'ok' },
+    { id: 'i3', name: 'Cyanuric Acid (Stabilizer)', category: 'Chemical', qty: 18, unit: 'lb', min: 25, status: 'low' },
+    { id: 'i4', name: 'Calcium Hypochlorite',    category: 'Chemical', qty: 45, unit: 'lb', min: 30, status: 'ok' },
+    { id: 'i5', name: 'pH Increaser (Soda Ash)', category: 'Chemical', qty: 22, unit: 'lb', min: 20, status: 'ok' },
+    { id: 'i6', name: 'DE Filter Powder',        category: 'Chemical', qty: 6,  unit: 'lb', min: 15, status: 'critical' },
+    { id: 'i7', name: '4x4 Waterline Tile (Blue Mosaic)', category: 'Material', qty: 320, unit: 'sqft', min: 200, status: 'ok' },
+    { id: 'i8', name: 'Rebar (#3, 20ft)',         category: 'Material', qty: 48, unit: 'bars', min: 30, status: 'ok' },
+    { id: 'i9', name: 'Variable-Speed Pump (1.5HP)', category: 'Equipment', qty: 2, unit: 'units', min: 3, status: 'low' },
+    { id: 'i10', name: 'Pool Skimmer Nets',       category: 'Equipment', qty: 12, unit: 'units', min: 8, status: 'ok' },
+  ],
+
+  alerts: [
+    { type: 'critical', title: 'Liquid Chlorine — Critical Low',  desc: '8 gal remaining. Cleaning routes will run short by Friday.' },
+    { type: 'critical', title: 'DE Filter Powder — Critical Low', desc: '6 lb on hand. Reorder needed before next backwash cycle.' },
+    { type: 'low',      title: 'Cyanuric Acid below threshold',   desc: '18 lb (min: 25). Suggest reorder this week.' },
+    { type: 'info',     title: 'Invoice ready — Hendersons',      desc: 'Gunite milestone reached. $18,750 progress invoice queued.' },
+    { type: 'info',     title: 'Client message — Ramirez',        desc: 'Asking about tile color sample. Reply pending.' },
+  ],
+
+  messages: [
+    { id: 'm1', from: 'Hendersons',       initials: 'H',  preview: 'Hi Jose — quick question about the gunite cure time and when we can…', time: '11:14 AM', unread: true },
+    { id: 'm2', from: 'Ramirez Family',   initials: 'R',  preview: 'Can we swap the tile from the navy mosaic to the lighter Caribbean blu…', time: '9:42 AM',  unread: true },
+    { id: 'm3', from: 'Sunset Villas HOA',initials: 'SV', preview: 'Thanks for getting out early this morning — pool looks great for the…', time: 'Yesterday', unread: false },
+    { id: 'm4', from: 'The Liu Estate',   initials: 'LE', preview: 'Approved on the pump replacement. Please proceed.',                      time: 'Yesterday', unread: false },
+    { id: 'm5', from: 'Patel Residence',  initials: 'P',  preview: 'Will you guys be coming today? Asking because of the rain forecast…',   time: '2 days ago',unread: false },
+  ],
+
+  kpis: {
+    jobsToday:      { value: 7, delta: '+2', dir: 'up' },
+    activeCrews:    { value: 4, delta: '+0', dir: 'flat' },
+    revenueWeek:    { value: '$28.4K', delta: '+12%', dir: 'up' },
+    onTimeRate:     { value: '94%', delta: '+6%', dir: 'up' },
+  },
+
+  // ============== DOCUMENTS PER JOB (Blueprints + Permits) ==============
+  jobDocuments: {
+    'j1': [
+      { id: 'doc1',  name: 'Blueprint — Henderson Pool Build',      type: 'blueprint', date: '2026-05-01', size: '2.4 MB',  icon: '📐', status: 'approved' },
+      { id: 'doc2',  name: 'Site Plan — Henderson Residence',       type: 'blueprint', date: '2026-05-01', size: '1.8 MB',  icon: '📐', status: 'approved' },
+      { id: 'doc3',  name: 'Building Permit — City of Westlake',    type: 'permit',    date: '2026-05-08', size: '340 KB',  icon: '📋', status: 'approved' },
+      { id: 'doc4',  name: 'Electrical Permit — Henderson',         type: 'permit',    date: '2026-05-08', size: '280 KB',  icon: '📋', status: 'approved' },
+      { id: 'doc5',  name: 'Plumbing Permit — Henderson',           type: 'permit',    date: '2026-05-10', size: '295 KB',  icon: '📋', status: 'approved' },
+      { id: 'doc6',  name: 'Steel Inspection Sign-Off',             type: 'permit',    date: '2026-05-22', size: '180 KB',  icon: '✅', status: 'signed' },
+    ],
+    'j2': [
+      { id: 'doc7',  name: 'Blueprint — Ramirez Pool Build',        type: 'blueprint', date: '2026-03-10', size: '2.1 MB',  icon: '📐', status: 'approved' },
+      { id: 'doc8',  name: 'Building Permit — City of Eastbrook',   type: 'permit',    date: '2026-03-14', size: '310 KB',  icon: '📋', status: 'approved' },
+      { id: 'doc9',  name: 'Tile Spec Sheet — Caribbean Blue 4x4',  type: 'blueprint', date: '2026-03-20', size: '890 KB',  icon: '📐', status: 'active' },
+    ],
+    'j7': [
+      { id: 'doc10', name: 'Work Order — Liu Estate Pump Replacement', type: 'permit', date: '2026-06-15', size: '210 KB',  icon: '📋', status: 'active' },
+      { id: 'doc11', name: 'Equipment Spec — Pentair VS Pump 1.5HP',   type: 'blueprint', date: '2026-06-15', size: '1.2 MB', icon: '📐', status: 'active' },
+    ],
+    'j8': [
+      { id: 'doc12', name: 'Blueprint — Westwood Pool Build',       type: 'blueprint', date: '2026-06-20', size: '2.6 MB',  icon: '📐', status: 'pending' },
+      { id: 'doc13', name: 'Building Permit — City of Westlake',    type: 'permit',    date: '2026-06-21', size: '315 KB',  icon: '📋', status: 'pending' },
+    ],
+  },
+
+  // ============== ROADMAP PHASES (per construction job) ==============
+  // Each construction job has phases with date ranges that paint as bars on the roadmap.
+  // Cleaning jobs use recurring slots (not phased).
+  jobPhases: {
+    'j1': [ // Hendersons — New Build
+      { id: 'p1',  name: 'Excavation',       start: '2026-05-02', end: '2026-05-09', status: 'done',     crew: 'Construction A' },
+      { id: 'p2',  name: 'Steel & Plumbing', start: '2026-05-12', end: '2026-05-22', status: 'done',     crew: 'Construction A' },
+      { id: 'p3',  name: 'Pre-Gunite Insp.', start: '2026-06-08', end: '2026-06-12', status: 'done',     crew: 'Construction A' },
+      { id: 'p4',  name: 'Gunite Shell',     start: '2026-06-15', end: '2026-06-19', status: 'active',   crew: 'Construction A' },
+      { id: 'p5',  name: 'Cure Period',      start: '2026-06-20', end: '2026-06-27', status: 'upcoming', crew: '—' },
+      { id: 'p6',  name: 'Tile & Coping',    start: '2026-06-29', end: '2026-07-08', status: 'upcoming', crew: 'Construction B' },
+      { id: 'p7',  name: 'Plaster & Fill',   start: '2026-07-09', end: '2026-07-13', status: 'upcoming', crew: 'Construction A' },
+      { id: 'p8',  name: 'Startup & Handoff',start: '2026-07-14', end: '2026-07-16', status: 'upcoming', crew: 'Construction A' },
+    ],
+    'j2': [ // Ramirez — Tile & Coping currently
+      { id: 'p1', name: 'Excavation',        start: '2026-03-15', end: '2026-03-22', status: 'done',     crew: 'Construction B' },
+      { id: 'p2', name: 'Steel & Plumbing',  start: '2026-03-25', end: '2026-04-06', status: 'done',     crew: 'Construction B' },
+      { id: 'p3', name: 'Gunite Shell',      start: '2026-04-13', end: '2026-04-17', status: 'done',     crew: 'Construction B' },
+      { id: 'p4', name: 'Cure Period',       start: '2026-04-18', end: '2026-04-25', status: 'done',     crew: '—' },
+      { id: 'p5', name: 'Tile & Coping',     start: '2026-06-08', end: '2026-06-22', status: 'active',   crew: 'Construction B' },
+      { id: 'p6', name: 'Plaster & Fill',    start: '2026-06-23', end: '2026-06-27', status: 'upcoming', crew: 'Construction B' },
+      { id: 'p7', name: 'Startup & Handoff', start: '2026-06-28', end: '2026-06-30', status: 'upcoming', crew: 'Construction B' },
+    ],
+    'j7': [ // Liu Estate — Repair
+      { id: 'p1', name: 'Pump Diagnostic',   start: '2026-06-15', end: '2026-06-15', status: 'done',     crew: 'Repair Team' },
+      { id: 'p2', name: 'Pump Replacement',  start: '2026-06-16', end: '2026-06-16', status: 'upcoming', crew: 'Repair Team' },
+      { id: 'p3', name: 'Heater Diagnostic', start: '2026-06-17', end: '2026-06-17', status: 'upcoming', crew: 'Repair Team' },
+    ],
+    'j8': [ // Westwood — New Build (upcoming)
+      { id: 'p1', name: 'Excavation',        start: '2026-06-22', end: '2026-06-26', status: 'upcoming', crew: 'Construction B' },
+      { id: 'p2', name: 'Steel & Plumbing',  start: '2026-06-29', end: '2026-07-10', status: 'upcoming', crew: 'Construction A' },
+      { id: 'p3', name: 'Gunite Shell',      start: '2026-07-13', end: '2026-07-17', status: 'upcoming', crew: 'Construction A' },
+      { id: 'p4', name: 'Cure Period',       start: '2026-07-18', end: '2026-07-25', status: 'upcoming', crew: '—' },
+      { id: 'p5', name: 'Tile & Coping',     start: '2026-07-27', end: '2026-08-07', status: 'upcoming', crew: 'Construction B' },
+      { id: 'p6', name: 'Plaster & Fill',    start: '2026-08-10', end: '2026-08-14', status: 'upcoming', crew: 'Construction A' },
+      { id: 'p7', name: 'Startup & Handoff', start: '2026-08-17', end: '2026-08-19', status: 'upcoming', crew: 'Construction A' },
+    ],
+  },
+
+  // ============== MATERIAL & EQUIPMENT DELIVERIES / BOOKINGS ==============
+  // Items that need to land on a specific date/time, tied to a job.
+  // type: 'delivery' (materials arriving) | 'equipment' (equipment booked on-site) | 'service' (maintenance window) | 'inspection'
+  deliveries: [
+    // ----- HENDERSONS (j1) -----
+    { id: 'd1', jobId: 'j1', date: '2026-06-16', type: 'delivery',  item: 'Gunite mix — 14 yd³',        vendor: 'Coastal Concrete', status: 'confirmed', time: '7:00 AM', cost: 2240, note: 'Pump truck + 2 crew' },
+    { id: 'd2', jobId: 'j1', date: '2026-06-15', type: 'equipment', item: 'Gunite Rig (GR-01)',          vendor: 'Internal',         status: 'on-site',   time: '7:45 AM', eqId: 'eq2' },
+    { id: 'd3', jobId: 'j1', date: '2026-06-15', type: 'equipment', item: 'Mini Excavator (EX-01)',      vendor: 'Internal',         status: 'on-site',   time: '7:30 AM', eqId: 'eq1' },
+    { id: 'd4', jobId: 'j1', date: '2026-06-22', type: 'inspection',item: 'Pre-tile inspection',         vendor: 'City of Westlake', status: 'scheduled', time: '10:00 AM' },
+    { id: 'd5', jobId: 'j1', date: '2026-06-29', type: 'delivery',  item: 'Waterline tile — 320 sqft',    vendor: 'Aqua Tile Co.',    status: 'pending',   time: '8:00 AM', cost: 4480, note: 'Caribbean Blue 4x4' },
+    { id: 'd6', jobId: 'j1', date: '2026-06-29', type: 'delivery',  item: 'Coping stones — 90 lf',        vendor: 'Stone & Co.',      status: 'confirmed', time: '9:00 AM', cost: 2700 },
+    { id: 'd7', jobId: 'j1', date: '2026-06-29', type: 'equipment', item: 'Tile Saw (TS-01)',            vendor: 'Internal',         status: 'booked',    time: 'All day',  eqId: 'eq10' },
+    { id: 'd8', jobId: 'j1', date: '2026-07-06', type: 'equipment', item: 'Plaster Mixer (PM-01)',       vendor: 'Internal',         status: 'booked',    time: 'All day',  eqId: 'eq4',  note: 'Back from service 6/18' },
+    { id: 'd9', jobId: 'j1', date: '2026-07-09', type: 'delivery',  item: 'Plaster mix — 80 bags',        vendor: 'PoolPro Supply',   status: 'pending',   time: '7:00 AM', cost: 1840 },
+    { id: 'd10',jobId: 'j1', date: '2026-07-13', type: 'delivery',  item: 'Startup chemicals kit',        vendor: 'PoolPro Supply',   status: 'pending',   time: '8:00 AM', cost: 340 },
+
+    // ----- RAMIREZ (j2) -----
+    { id: 'd11',jobId: 'j2', date: '2026-06-15', type: 'equipment', item: 'Concrete Mixer (CM-01)',      vendor: 'Internal',         status: 'transit',   time: '8:00 AM', eqId: 'eq9' },
+    { id: 'd12',jobId: 'j2', date: '2026-06-15', type: 'equipment', item: 'Tile Saw (TS-01)',            vendor: 'Internal',         status: 'on-site',   time: 'All day',  eqId: 'eq10' },
+    { id: 'd13',jobId: 'j2', date: '2026-06-17', type: 'equipment', item: 'Trencher (TR-01)',            vendor: 'Internal',         status: 'CONFLICT',  time: 'AM',       eqId: 'eq3',  note: 'Also requested by Westwood (j8)' },
+    { id: 'd14',jobId: 'j2', date: '2026-06-22', type: 'delivery',  item: 'Coping bedding mortar',        vendor: 'Stone & Co.',      status: 'confirmed', time: '8:00 AM', cost: 460 },
+    { id: 'd15',jobId: 'j2', date: '2026-06-23', type: 'delivery',  item: 'Plaster mix — 100 bags',       vendor: 'PoolPro Supply',   status: 'confirmed', time: '7:30 AM', cost: 2300 },
+    { id: 'd16',jobId: 'j2', date: '2026-06-28', type: 'delivery',  item: 'Startup chemicals kit',        vendor: 'PoolPro Supply',   status: 'pending',   time: '8:00 AM', cost: 340 },
+
+    // ----- LIU ESTATE (j7) -----
+    { id: 'd17',jobId: 'j7', date: '2026-06-16', type: 'delivery',  item: '1.5HP Variable Speed Pump',   vendor: 'Pentair',          status: 'confirmed', time: '9:00 AM', cost: 1280 },
+    { id: 'd18',jobId: 'j7', date: '2026-06-17', type: 'delivery',  item: 'Heater ignition module',      vendor: 'Raypak Direct',    status: 'pending',   time: 'TBD',      cost: 285,  note: 'Awaiting backorder ETA' },
+    { id: 'd19',jobId: 'j7', date: '2026-06-16', type: 'equipment', item: 'Repair Van (RV-01)',          vendor: 'Internal',         status: 'on-site',   time: '9:30 AM', eqId: 'eq8' },
+
+    // ----- WESTWOOD (j8) UPCOMING NEW BUILD -----
+    { id: 'd20',jobId: 'j8', date: '2026-06-17', type: 'equipment', item: 'Trencher (TR-01)',            vendor: 'Internal',         status: 'CONFLICT',  time: 'AM',       eqId: 'eq3', note: 'Also booked at Ramirez (j2)' },
+    { id: 'd21',jobId: 'j8', date: '2026-06-22', type: 'equipment', item: 'Mini Excavator (EX-01)',      vendor: 'Internal',         status: 'booked',    time: '7:00 AM', eqId: 'eq1' },
+    { id: 'd22',jobId: 'j8', date: '2026-06-29', type: 'equipment', item: 'Gunite Rig (GR-01)',          vendor: 'Internal',         status: 'booked',    time: '7:30 AM', eqId: 'eq2' },
+    { id: 'd23',jobId: 'j8', date: '2026-07-13', type: 'delivery',  item: 'Gunite mix — 16 yd³',          vendor: 'Coastal Concrete', status: 'pending',   time: '7:00 AM', cost: 2560 },
+    { id: 'd24',jobId: 'j8', date: '2026-07-27', type: 'delivery',  item: 'Waterline tile — 360 sqft',   vendor: 'Aqua Tile Co.',    status: 'pending',   time: '8:00 AM', cost: 5040 },
+
+    // ----- SERVICE WINDOWS -----
+    { id: 'd25',jobId: null, date: '2026-06-14', type: 'service',   item: 'Plaster Mixer — bearing replace', vendor: 'Service Bay',  status: 'in-progress', time: '9:00 AM', eqId: 'eq4', note: 'Back in service 6/18' },
+  ],
+
+  // ============== EQUIPMENT / MACHINERY FLEET ==============
+  // Realistic pool construction & service fleet with location, assignment, and schedule
+  equipment: [
+    {
+      id: 'eq1', name: 'Mini Excavator', model: 'Bobcat E35',
+      category: 'heavy', icon: 'excavator', tag: 'EX-01',
+      status: 'in-use',          // in-use | idle | maintenance | transit
+      location: 'The Hendersons — 14 Magnolia Ct',
+      lat: 38, lng: 42,
+      assignedJob: 'j1', assignedCrew: 'Construction A',
+      since: '2026-06-12 07:30',
+      hoursLogged: 412, hoursToService: 38,
+      nextAssignment: { jobId: 'j2', client: 'Ramirez Family', date: '2026-06-22', need: 'Backfill prep' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq2', name: 'Gunite Rig', model: 'Reed B-50HD',
+      category: 'heavy', icon: 'gunite', tag: 'GR-01',
+      status: 'in-use',
+      location: 'The Hendersons — 14 Magnolia Ct',
+      lat: 38, lng: 42,
+      assignedJob: 'j1', assignedCrew: 'Construction A',
+      since: '2026-06-15 07:45',
+      hoursLogged: 1280, hoursToService: 12,
+      nextAssignment: { jobId: 'j8', client: 'Westwood (New Build)', date: '2026-06-29', need: 'Gunite shoot' },
+      bookings: ['2026-06-29', '2026-07-13'],
+      conflict: false,
+      condition: 'service-soon',
+    },
+    {
+      id: 'eq3', name: 'Trencher', model: 'Ditch Witch RT45',
+      category: 'heavy', icon: 'trencher', tag: 'TR-01',
+      status: 'idle',
+      location: 'Main Yard',
+      lat: 50, lng: 50,
+      assignedJob: null, assignedCrew: null,
+      since: '2026-06-13 17:20',
+      hoursLogged: 685, hoursToService: 95,
+      nextAssignment: { jobId: 'j2', client: 'Ramirez Family', date: '2026-06-17', need: 'Plumbing trench' },
+      conflict: true,  // also requested for j8 same day — see below
+      conflictNote: 'Also requested by Westwood (New Build) for 6/17',
+      bookings: ['2026-06-17', '2026-06-17'],
+      condition: 'good',
+    },
+    {
+      id: 'eq4', name: 'Plaster Mixer', model: 'Imer Mortarman 360',
+      category: 'heavy', icon: 'mixer', tag: 'PM-01',
+      status: 'maintenance',
+      location: 'Service Bay — Main Yard',
+      lat: 50, lng: 50,
+      assignedJob: null, assignedCrew: null,
+      since: '2026-06-14 09:00',
+      hoursLogged: 920, hoursToService: 0,
+      nextAssignment: { jobId: 'j1', client: 'The Hendersons', date: '2026-07-06', need: 'Final plaster coat' },
+      conflict: false,
+      condition: 'in-service',
+      serviceNote: 'Replacing drum bearings — back in service 6/18',
+    },
+    {
+      id: 'eq5', name: 'Vacuum Truck', model: 'Vactor 2100i',
+      category: 'heavy', icon: 'vactor', tag: 'VT-01',
+      status: 'idle',
+      location: 'Main Yard',
+      lat: 50, lng: 50,
+      assignedJob: null, assignedCrew: null,
+      since: '2026-06-14 16:15',
+      hoursLogged: 2150, hoursToService: 145,
+      nextAssignment: { jobId: null, client: 'Drain & clean — 3 pools', date: '2026-06-18', need: 'Seasonal drain' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq6', name: 'Service Truck #1', model: 'Ford F-250',
+      category: 'vehicle', icon: 'truck', tag: 'ST-01',
+      status: 'in-use',
+      location: 'Sunset Villas — 900 Sunset Blvd',
+      lat: 22, lng: 65,
+      assignedJob: 'j3', assignedCrew: 'Cleaning Rt 1',
+      since: '2026-06-15 06:00',
+      hoursLogged: 1820, hoursToService: 220,
+      nextAssignment: { jobId: 'j4', client: 'Okonkwo Residence', date: '2026-06-15', need: 'Same-day next stop' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq7', name: 'Service Truck #2', model: 'Ford F-250',
+      category: 'vehicle', icon: 'truck', tag: 'ST-02',
+      status: 'idle',
+      location: 'Main Yard',
+      lat: 50, lng: 50,
+      assignedJob: null, assignedCrew: 'Cleaning Rt 2',
+      since: '2026-06-15 06:00',
+      hoursLogged: 1620, hoursToService: 280,
+      nextAssignment: { jobId: null, client: 'Cleaning Rt 2 — assign route', date: '2026-06-16', need: 'Awaiting dispatch' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq8', name: 'Repair Van', model: 'Mercedes Sprinter',
+      category: 'vehicle', icon: 'van', tag: 'RV-01',
+      status: 'in-use',
+      location: 'The Liu Estate — 5 Hilltop Dr',
+      lat: 70, lng: 35,
+      assignedJob: 'j7', assignedCrew: 'Repair Team',
+      since: '2026-06-15 09:45',
+      hoursLogged: 940, hoursToService: 320,
+      nextAssignment: { jobId: null, client: 'Service calls — 2 stops', date: '2026-06-16', need: 'Heater diagnostics' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq9', name: 'Concrete Mixer', model: 'Multiquip MC94S',
+      category: 'heavy', icon: 'mixer', tag: 'CM-01',
+      status: 'transit',
+      location: 'En route — Ramirez Family',
+      lat: 48, lng: 35,
+      assignedJob: 'j2', assignedCrew: 'Construction B',
+      since: '2026-06-15 07:20',
+      hoursLogged: 540, hoursToService: 160,
+      nextAssignment: { jobId: 'j2', client: 'Ramirez Family', date: '2026-06-15', need: 'Coping bedding' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq10', name: 'Tile Saw (Wet)', model: 'MK-770',
+      category: 'tool', icon: 'saw', tag: 'TS-01',
+      status: 'in-use',
+      location: 'Ramirez Family — 208 Cedar Ridge',
+      lat: 55, lng: 28,
+      assignedJob: 'j2', assignedCrew: 'Construction B',
+      since: '2026-06-14 08:00',
+      hoursLogged: 285, hoursToService: 85,
+      nextAssignment: { jobId: 'j1', client: 'The Hendersons', date: '2026-06-22', need: 'Waterline tile cuts' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq11', name: 'Robotic Pool Cleaner', model: 'Dolphin M600',
+      category: 'tool', icon: 'robot', tag: 'RC-01',
+      status: 'idle',
+      location: 'Main Yard',
+      lat: 50, lng: 50,
+      assignedJob: null, assignedCrew: null,
+      since: '2026-06-14 18:00',
+      hoursLogged: 145, hoursToService: 55,
+      nextAssignment: { jobId: 'j5', client: 'Greene Family', date: '2026-06-16', need: 'Deep clean' },
+      conflict: false,
+      condition: 'good',
+    },
+    {
+      id: 'eq12', name: 'Pressure Washer', model: 'Honda GX390',
+      category: 'tool', icon: 'washer', tag: 'PW-01',
+      status: 'in-use',
+      location: 'Sunset Villas — 900 Sunset Blvd',
+      lat: 22, lng: 65,
+      assignedJob: 'j3', assignedCrew: 'Cleaning Rt 1',
+      since: '2026-06-15 06:15',
+      hoursLogged: 380, hoursToService: 120,
+      nextAssignment: { jobId: 'j4', client: 'Okonkwo Residence', date: '2026-06-15', need: 'Deck cleaning' },
+      conflict: false,
+      condition: 'good',
+    },
+  ],
+};
+
+</script>
+<script>
+/* AquaOps — Main App Logic */
+
+// SVG icon library (Lucide-style)
+const ICON = {
+  bell: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
+  search: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  menu: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>',
+  hardhat: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1zm6-3V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v7M4 15v-3a8 8 0 0 1 16 0v3"/></svg>',
+  dashboard: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>',
+  user: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  mapPin: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>',
+  clock: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  camera: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>',
+  message: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  flask: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>',
+  truck: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>',
+  phone: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  back: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>',
+  alert: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>',
+  invoice: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>',
+  arrowUp: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>',
+  arrowDown: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>',
+  package: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7.0 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>',
+  check: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  signature: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
+  logout: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>',
+  wrench: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  calendar: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>',
+  move: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/></svg>',
+};
+
+// Emoji icon per equipment type — simple and instantly readable
+const EQ_EMOJI = {
+  excavator: '🚧', gunite: '💦', trencher: '🪵', mixer: '⚙️',
+  vactor: '🚛', truck: '🚗', van: '🚐', saw: '🚧',
+  robot: '🤖', washer: '💧',
+};
+function eqEmoji(item) { return EQ_EMOJI[item.icon] || '🔧'; }
+function eqCategoryClass(item) {
+  return item.category === 'vehicle' ? 'eq-icon-vehicle' :
+         item.category === 'tool'    ? 'eq-icon-tool' : 'eq-icon-heavy';
+}
+
+// ============== STATE ==============
+const STATE = {
+  user: null,
+  view: 'field',          // 'roadmap' | 'field' | 'office' | 'client'
+  jobDetail: null,        // job id when drilling in
+  data: null,
+  // Roadmap state
+  roadmapZoom: 'month',   // 'week' | 'month' | 'quarter'
+  roadmapAnchor: null,    // anchor date (ISO yyyy-mm-dd) — set on first render
+};
+
+function loadState() {
+  const saved = localStorage.getItem('palmpool_data');
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      // Force-refresh seed if version is missing or stale (so old demo sessions get new features)
+      if (!parsed.version || parsed.version < SEED_VERSION) {
+        STATE.data = JSON.parse(JSON.stringify(SEED));
+        saveState();
+        return;
+      }
+      STATE.data = parsed; return;
+    } catch(e) {}
+  }
+  STATE.data = JSON.parse(JSON.stringify(SEED));
+}
+function saveState() {
+  localStorage.setItem('palmpool_data', JSON.stringify(STATE.data));
+}
+function resetData() {
+  localStorage.removeItem('palmpool_data');
+  STATE.data = JSON.parse(JSON.stringify(SEED));
+  saveState();
+}
+
+// ============== UTIL ==============
+function el(html) {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = html.trim();
+  return wrapper.firstChild;
+}
+function toast(msg) {
+  const t = el(`<div class="toast">${ICON.check}<span>${msg}</span></div>`);
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2200);
+}
+function modal(title, body, onConfirm, confirmText='Confirm') {
+  const m = el(`
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal-title">${title}</div>
+        <div>${body}</div>
+        <div class="modal-actions">
+          <button class="btn-secondary" data-cancel>Cancel</button>
+          <button class="btn-primary" data-confirm>${confirmText}</button>
+        </div>
+      </div>
+    </div>`);
+  document.body.appendChild(m);
+  m.querySelector('[data-cancel]').onclick = () => m.remove();
+  m.querySelector('[data-confirm]').onclick = () => { onConfirm && onConfirm(); m.remove(); };
+  m.onclick = (e) => { if (e.target === m) m.remove(); };
+}
+
+// ============== LOGIN ==============
+function renderLogin() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  const screen = el(`
+    <div class="login-screen">
+      <div class="login-card">
+        <div class="login-logo">
+          <div class="login-logo-mark">A</div>
+          <div class="login-logo-text">AquaOps</div>
+        </div>
+        <div class="login-tagline">One platform. Two wings. Every job, on track.</div>
+
+        <h2>Sign in to continue</h2>
+        <form id="loginForm">
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="you@company.com" autocomplete="off" required>
+          </div>
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="••••••••" value="demo" required>
+          </div>
+          <button type="submit" class="login-btn">Sign In</button>
+        </form>
+
+        <div class="demo-accounts">
+          <div class="demo-accounts-title">Demo accounts — tap to sign in</div>
+          ${SEED.users.map(u => `
+            <div class="demo-account" data-user="${u.id}">
+              <div class="demo-account-info">
+                <div class="demo-account-avatar">${u.initials}</div>
+                <div>
+                  <div class="demo-account-name">${u.name}</div>
+                  <div class="demo-account-role">${u.role === 'pm' ? 'Project Manager' : u.role === 'crew' ? 'Field Crew · ' + (u.crew||'') : u.role === 'office' ? 'Office / Dispatch' : 'Client'}</div>
+                </div>
+              </div>
+              <div style="color: var(--gray-400); font-size: 18px;">›</div>
+            </div>`).join('')}
+          <div style="margin-top:10px;padding:10px 12px;background:var(--pool-50);border-radius:8px;font-size:11px;color:var(--pool-500);font-weight:600;">
+            🌴 Palm Pool & Spa — Tap a role above to preview
+          </div>
+        </div>
+      </div>
+    </div>`);
+  app.appendChild(screen);
+
+  // Tap demo accounts
+  screen.querySelectorAll('.demo-account').forEach(row => {
+    row.onclick = () => {
+      const u = SEED.users.find(x => x.id === row.dataset.user);
+      signIn(u);
+    };
+  });
+  // Form submit (defaults to PM Jose)
+  screen.querySelector('#loginForm').onsubmit = (e) => {
+    e.preventDefault();
+    signIn(SEED.users[0]);
+  };
+}
+function signIn(user) {
+  STATE.user = user;
+  localStorage.setItem('palmpool_user', JSON.stringify(user));
+  // Pick default view based on role
+  if (user.role === 'crew')        STATE.view = 'field';
+  else if (user.role === 'pm')     STATE.view = 'roadmap';   // PM lands on the master roadmap
+  else if (user.role === 'office') STATE.view = 'office';
+  else if (user.role === 'client') STATE.view = 'client';
+  renderApp();
+}
+function signOut() {
+  localStorage.removeItem('palmpool_user');
+  STATE.user = null;
+  renderLogin();
+}
+
+// ============== APP SHELL ==============
+function renderApp() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const shell = el(`
+    <div class="app-shell">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <div class="brand-mark">A</div>
+          <div class="brand-text">AquaOps</div>
+        </div>
+        <div class="top-bar-right">
+          <button class="icon-btn" id="searchBtn" title="Search">${ICON.search}</button>
+          <button class="icon-btn" id="notifyBtn" title="Notifications">${ICON.bell}<span class="badge"></span></button>
+          <div class="user-chip" id="userChip">
+            <div class="user-chip-avatar">${STATE.user.initials}</div>
+            <div class="user-chip-name">${STATE.user.name.split(' ')[0]}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-switcher">
+        <button class="view-tab ${STATE.view==='roadmap'?'active':''}" data-view="roadmap">${ICON.calendar}<span>Roadmap</span></button>
+        <button class="view-tab ${STATE.view==='field'?'active':''}" data-view="field">${ICON.hardhat}<span>Field</span></button>
+        <button class="view-tab ${STATE.view==='office'?'active':''}" data-view="office">${ICON.dashboard}<span>Office</span></button>
+        <button class="view-tab ${STATE.view==='client'?'active':''}" data-view="client">${ICON.user}<span>Client</span></button>
+      </div>
+
+      <div class="main" id="main"></div>
+    </div>`);
+
+  app.appendChild(shell);
+
+  shell.querySelectorAll('.view-tab').forEach(t => {
+    t.onclick = () => { STATE.view = t.dataset.view; STATE.jobDetail = null; renderApp(); };
+  });
+  shell.querySelector('#userChip').onclick = () => {
+    modal('Account', `
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div class="user-chip-avatar" style="width:48px;height:48px;font-size:16px;">${STATE.user.initials}</div>
+        <div>
+          <div style="font-weight:700;">${STATE.user.name}</div>
+          <div style="color:var(--gray-500);font-size:13px;">${STATE.user.email}</div>
+        </div>
+      </div>
+      <button class="btn-secondary" style="width:100%;display:flex;align-items:center;justify-content:center;gap:6px;" id="resetBtn">Reset demo data</button>
+    `, signOut, 'Sign out');
+    setTimeout(() => {
+      const r = document.querySelector('#resetBtn');
+      if (r) r.onclick = () => { resetData(); toast('Demo data reset'); document.querySelector('.modal-overlay').remove(); renderApp(); };
+    }, 50);
+  };
+  shell.querySelector('#searchBtn').onclick  = () => toast('Search — coming soon');
+  shell.querySelector('#notifyBtn').onclick  = () => renderAlertsModal();
+
+  // Render the chosen view
+  const main = shell.querySelector('#main');
+  if (STATE.view === 'roadmap')      renderRoadmapView(main);
+  else if (STATE.view === 'field')   renderFieldView(main);
+  else if (STATE.view === 'office')  renderOfficeView(main);
+  else                               renderClientView(main);
+}
+
+// ============== ROADMAP VIEW (Master Project Timeline) ==============
+function renderRoadmapView(main) {
+  const data = STATE.data;
+  const today = new Date('2026-06-15'); // demo "today" pinned to match seed data
+  // Initialize anchor on first load — start a few days before today
+  if (!STATE.roadmapAnchor) {
+    const anchor = new Date(today); anchor.setDate(anchor.getDate() - 7);
+    STATE.roadmapAnchor = isoDate(anchor);
+  }
+
+  // Determine span (number of days visible) per zoom
+  const span = STATE.roadmapZoom === 'week' ? 14
+             : STATE.roadmapZoom === 'quarter' ? 90
+             : 35; // month
+
+  // Build day list
+  const startDate = new Date(STATE.roadmapAnchor);
+  const days = [];
+  for (let i = 0; i < span; i++) {
+    const d = new Date(startDate); d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+  const dayWidth = STATE.roadmapZoom === 'week' ? 80
+                 : STATE.roadmapZoom === 'quarter' ? 22
+                 : 38; // month
+
+  // Build rows: each construction/repair job + its delivery sub-row
+  const jobsOnRoadmap = data.jobs.filter(j => data.jobPhases && data.jobPhases[j.id]);
+  jobsOnRoadmap.sort((a, b) => {
+    const ax = (data.jobPhases[a.id][0] || {}).start || '2099';
+    const bx = (data.jobPhases[b.id][0] || {}).start || '2099';
+    return ax.localeCompare(bx);
+  });
+
+  // Roadmap KPI stats
+  const allDeliveries = data.deliveries || [];
+  const conflicts = allDeliveries.filter(d => d.status === 'CONFLICT');
+  const next7days = allDeliveries.filter(d => {
+    const dd = new Date(d.date);
+    const diff = (dd - today) / 86400000;
+    return diff >= 0 && diff <= 7;
+  });
+  const pendingCount = allDeliveries.filter(d => d.status === 'pending').length;
+  const totalBudgetThisMonth = allDeliveries
+    .filter(d => d.date.startsWith('2026-06') && d.cost)
+    .reduce((s, d) => s + (d.cost || 0), 0);
+
+  // Sticky label column width
+  const labelW = 200;
+  const gridCols = `${labelW}px repeat(${span}, ${dayWidth}px)`;
+
+  const view = el(`
+    <div>
+      <div class="roadmap-wrap">
+        <div class="roadmap-header">
+          <div class="roadmap-title-block">
+            <div class="roadmap-title">Master Project Roadmap</div>
+            <div class="roadmap-subtitle">All jobs · equipment · deliveries · inspections — one timeline</div>
+          </div>
+          <div class="roadmap-controls">
+            <button class="nav-btn-pill" id="rmPrev" title="Previous">←</button>
+            <button class="today-btn" id="rmToday">Today</button>
+            <button class="nav-btn-pill" id="rmNext" title="Next">→</button>
+            <div class="zoom-group">
+              <button class="zoom-btn ${STATE.roadmapZoom==='week'?'active':''}"    data-zoom="week">Week</button>
+              <button class="zoom-btn ${STATE.roadmapZoom==='month'?'active':''}"   data-zoom="month">Month</button>
+              <button class="zoom-btn ${STATE.roadmapZoom==='quarter'?'active':''}" data-zoom="quarter">Quarter</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-kpi-strip">
+          <div class="rk-card">
+            <div class="rk-label">Active Jobs</div>
+            <div class="rk-value">${jobsOnRoadmap.length}</div>
+            <div class="rk-sub">Construction + Repair</div>
+          </div>
+          <div class="rk-card">
+            <div class="rk-label">Next 7 Days</div>
+            <div class="rk-value">${next7days.length}</div>
+            <div class="rk-sub">Deliveries & equipment moves</div>
+          </div>
+          <div class="rk-card ${conflicts.length?'danger':''}">
+            <div class="rk-label">Conflicts</div>
+            <div class="rk-value">${conflicts.length}</div>
+            <div class="rk-sub">${conflicts.length ? 'Action needed' : 'All clear'}</div>
+          </div>
+          <div class="rk-card ${pendingCount > 2 ? 'warn' : ''}">
+            <div class="rk-label">Pending Confirm</div>
+            <div class="rk-value">${pendingCount}</div>
+            <div class="rk-sub">Awaiting vendor reply</div>
+          </div>
+        </div>
+
+        <div class="roadmap-legend">
+          <div class="legend-item"><span class="legend-swatch" style="background:linear-gradient(90deg,#b45309,#d97706);"></span>Gunite</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:linear-gradient(90deg,var(--pool-500),var(--pool-400));"></span>Tile/Coping</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:linear-gradient(90deg,#0e7490,#0891b2);"></span>Plaster</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:linear-gradient(90deg,#6b7280,#9ca3af);"></span>Cure</div>
+          <div class="legend-item"><span class="legend-marker" style="background:var(--green-500);border-radius:50%;"></span>Delivery</div>
+          <div class="legend-item"><span class="legend-marker" style="background:var(--navy-700);border-radius:3px;"></span>Equipment</div>
+          <div class="legend-item"><span class="legend-marker" style="background:#7c3aed;border-radius:50%;"></span>Inspection</div>
+          <div class="legend-item"><span class="legend-marker" style="background:var(--red-500);border-radius:50%;"></span>Conflict</div>
+        </div>
+
+        <div class="roadmap-body" id="roadmapBody">
+          <div class="gantt-grid" style="grid-template-columns:${gridCols};">
+            ${renderGanttContent(data, jobsOnRoadmap, days, today, dayWidth, labelW)}
+          </div>
+        </div>
+      </div>
+
+      ${renderUpNextPanel(data, today)}
+    </div>
+  `);
+  main.appendChild(view);
+
+  // Wire controls
+  view.querySelector('#rmPrev').onclick = () => {
+    const a = new Date(STATE.roadmapAnchor);
+    a.setDate(a.getDate() - Math.floor(span / 2));
+    STATE.roadmapAnchor = isoDate(a);
+    renderApp();
+  };
+  view.querySelector('#rmNext').onclick = () => {
+    const a = new Date(STATE.roadmapAnchor);
+    a.setDate(a.getDate() + Math.floor(span / 2));
+    STATE.roadmapAnchor = isoDate(a);
+    renderApp();
+  };
+  view.querySelector('#rmToday').onclick = () => {
+    const a = new Date(today); a.setDate(a.getDate() - 7);
+    STATE.roadmapAnchor = isoDate(a);
+    renderApp();
+  };
+  view.querySelectorAll('[data-zoom]').forEach(b => {
+    b.onclick = () => { STATE.roadmapZoom = b.dataset.zoom; renderApp(); };
+  });
+
+  // Wire bar / marker clicks (roadmap)
+  view.querySelectorAll('[data-phase]').forEach(b => {
+    b.onclick = (e) => { e.stopPropagation(); openPhaseDetail(b.dataset.phase, b.dataset.job); };
+  });
+  view.querySelectorAll('[data-delivery]').forEach(b => {
+    b.onclick = (e) => { e.stopPropagation(); openDeliveryDetail(b.dataset.delivery); };
+  });
+
+  // Wire up-next items
+  view.querySelectorAll('.upnext-item').forEach(item => {
+    item.onclick = (e) => { e.stopPropagation(); openDeliveryDetail(item.dataset.delivery); };
+  });
+
+  // Scroll to today on first render
+  setTimeout(() => {
+    const body = view.querySelector('#roadmapBody');
+    if (body) {
+      const todayIdx = days.findIndex(d => isoDate(d) === isoDate(today));
+      if (todayIdx >= 0) {
+        body.scrollLeft = Math.max(0, labelW + todayIdx * dayWidth - body.clientWidth/2 + dayWidth/2);
+      }
+    }
+  }, 50);
+}
+
+function isoDate(d) {
+  return d.toISOString().slice(0, 10);
+}
+function daysBetween(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+function monthShort(d) {
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+}
+function phaseClassName(name) {
+  const n = name.toLowerCase();
+  if (n.includes('excavat'))                return 'phase-excavation';
+  if (n.includes('steel') || n.includes('plumb'))   return 'phase-steel';
+  if (n.includes('gunite'))                 return 'phase-gunite';
+  if (n.includes('cure'))                   return 'phase-cure';
+  if (n.includes('tile') || n.includes('coping'))   return 'phase-tile';
+  if (n.includes('plaster') || n.includes('fill'))  return 'phase-plaster';
+  if (n.includes('handoff') || n.includes('startup')) return 'phase-handoff';
+  if (n.includes('inspect'))                return 'phase-inspection';
+  if (n.includes('pump')   || n.includes('heater') || n.includes('repair')) return 'phase-repair';
+  return 'phase-default';
+}
+
+function renderGanttContent(data, jobs, days, today, dayWidth, labelW) {
+  const span = days.length;
+  const startISO = isoDate(days[0]);
+  const endISO   = isoDate(days[span - 1]);
+  const todayISO = isoDate(today);
+
+  // --- Date header row ---
+  let html = '<div class="gantt-label-col gantt-date-cell" style="min-height:auto;padding:8px 14px;text-align:left;">' +
+             '<div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">Timeline</div>' +
+             '</div>';
+  for (const d of days) {
+    const iso = isoDate(d);
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+    const isToday = iso === todayISO;
+    html += `<div class="gantt-date-cell ${isWeekend?'weekend':''} ${isToday?'today':''}">
+      <div class="gantt-date-day">${d.getDate()}</div>
+      <div class="gantt-date-month">${monthShort(d)}</div>
+    </div>`;
+  }
+
+  // Today vertical line position (computed in absolute px from grid start)
+  const todayIdx = days.findIndex(d => isoDate(d) === todayISO);
+
+  // --- For each job: a row of phase bars + a sub-row of delivery markers ---
+  for (const job of jobs) {
+    const phases = data.jobPhases[job.id] || [];
+    const jobDeliveries = (data.deliveries || []).filter(d => d.jobId === job.id);
+
+    // ---- Phase row ----
+    html += `<div class="gantt-label-col gantt-row-label">
+      <div class="gantt-row-job-name">${job.client}</div>
+      <div class="gantt-row-job-sub">${job.service.split('—')[0].trim()}</div>
+    </div>`;
+
+    // Day cells (placeholders) for the phase row — plus absolutely positioned bars inside the FIRST cell
+    // Trick: render each day cell, but inject all bars into the first cell with absolute positioning relative to a wrapper.
+    // Simpler: render a relative container that spans all cells via grid-column.
+    html += `<div class="gantt-cell" style="grid-column: span ${span}; position: relative;">`;
+    // Render day-grid backgrounds inside this strip
+    for (let i = 0; i < span; i++) {
+      const d = days[i];
+      const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+      const isToday = isoDate(d) === todayISO;
+      html += `<div style="position:absolute;left:${i*dayWidth}px;top:0;bottom:0;width:${dayWidth}px;border-right:1px solid var(--gray-100);${isWeekend?'background:rgba(8,145,178,0.025);':''}${isToday?'background:rgba(8,145,178,0.06);':''}"></div>`;
+    }
+    // Render bars for this job
+    for (const phase of phases) {
+      // Clip phase to visible range
+      const pStart = phase.start < startISO ? startISO : phase.start;
+      const pEnd   = phase.end   > endISO   ? endISO   : phase.end;
+      if (pEnd < startISO || pStart > endISO) continue; // outside window
+      const offset = daysBetween(startISO, pStart);
+      const width  = (daysBetween(pStart, pEnd) + 1) * dayWidth - 4;
+      if (width < 4) continue;
+      const cls = phaseClassName(phase.name);
+      const statusCls = phase.status === 'done' ? 'done' : phase.status === 'active' ? 'active' : '';
+      html += `<div class="phase-bar ${cls} ${statusCls}"
+        style="left:${offset*dayWidth+2}px; width:${width}px;"
+        data-phase="${phase.id}" data-job="${job.id}"
+        title="${phase.name} · ${phase.start} → ${phase.end} · ${phase.crew}">
+        ${phase.name}
+      </div>`;
+    }
+    // Today line in this strip
+    if (todayIdx >= 0) {
+      html += `<div class="today-line" style="left:${todayIdx*dayWidth + dayWidth/2}px;"></div>`;
+    }
+    html += `</div>`;
+
+    // ---- Sub-row: deliveries + equipment markers ----
+    if (jobDeliveries.length > 0) {
+      html += `<div class="gantt-label-col gantt-row-sublabel">↳ Deliveries & Equipment</div>`;
+      html += `<div class="gantt-cell sub" style="grid-column: span ${span}; position: relative;">`;
+      for (let i = 0; i < span; i++) {
+        const d = days[i];
+        const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+        const isToday = isoDate(d) === todayISO;
+        html += `<div style="position:absolute;left:${i*dayWidth}px;top:0;bottom:0;width:${dayWidth}px;border-right:1px solid var(--gray-100);${isWeekend?'background:rgba(8,145,178,0.025);':''}${isToday?'background:rgba(8,145,178,0.06);':''}"></div>`;
+      }
+      // Group deliveries by date to avoid overlap
+      const byDate = {};
+      for (const dlv of jobDeliveries) {
+        if (dlv.date < startISO || dlv.date > endISO) continue;
+        (byDate[dlv.date] = byDate[dlv.date] || []).push(dlv);
+      }
+      for (const [dateISO, items] of Object.entries(byDate)) {
+        const idx = daysBetween(startISO, dateISO);
+        const x = idx * dayWidth + dayWidth/2;
+        items.forEach((dlv, i) => {
+          const isConflict = dlv.status === 'CONFLICT';
+          let markerCls, glyph;
+          if (isConflict)                  { markerCls = 'marker-conflict';   glyph = '!'; }
+          else if (dlv.type === 'delivery'){ markerCls = 'marker-delivery';   glyph = '📦'; }
+          else if (dlv.type === 'equipment'){ markerCls = 'marker-equipment'; glyph = '🔧'; }
+          else if (dlv.type === 'inspection'){ markerCls = 'marker-inspection'; glyph = '✓'; }
+          else if (dlv.type === 'service'){ markerCls = 'marker-service';     glyph = '⚙'; }
+          else                             { markerCls = 'marker-delivery';   glyph = '•'; }
+          const yOffset = i * 4; // slight stagger if multiple same-day
+          html += `<div class="gantt-marker ${markerCls}"
+            style="left:${x}px; top:${6+yOffset}px;"
+            data-delivery="${dlv.id}"
+            title="${dlv.item} · ${dlv.date} ${dlv.time||''}">
+            <span style="font-size:10px;">${glyph}</span>
+          </div>`;
+        });
+      }
+      if (todayIdx >= 0) {
+        html += `<div class="today-line" style="left:${todayIdx*dayWidth + dayWidth/2}px;"></div>`;
+      }
+      html += `</div>`;
+    }
+  }
+
+  return html;
+}
+
+function renderUpNextPanel(data, today) {
+  const upcoming = (data.deliveries || [])
+    .filter(d => d.date >= isoDate(today))
+    .sort((a, b) => a.date.localeCompare(b.date) || (a.time||'').localeCompare(b.time||''))
+    .slice(0, 8);
+
+  const conflicts = (data.deliveries || []).filter(d => d.status === 'CONFLICT');
+
+  return `
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Up Next — What needs to land, when</div>
+      </div>
+      ${conflicts.length ? `
+        <div class="upnext-conflict-banner">
+          ${ICON.alert}
+          <span>${conflicts.length} scheduling conflict${conflicts.length>1?'s':''} need${conflicts.length>1?'':'s'} your attention</span>
+        </div>` : ''}
+      <div class="upnext-list">
+        ${upcoming.map(d => {
+          const dt = new Date(d.date);
+          const job = (data.jobs || []).find(j => j.id === d.jobId);
+          const iconBg = d.status === 'CONFLICT' ? 'var(--red-500)'
+                       : d.type === 'delivery'   ? 'var(--green-500)'
+                       : d.type === 'equipment'  ? 'var(--navy-700)'
+                       : d.type === 'inspection' ? '#7c3aed'
+                       : 'var(--amber-500)';
+          const glyph = d.status === 'CONFLICT' ? '!'
+                      : d.type === 'delivery'   ? '📦'
+                      : d.type === 'equipment'  ? '🔧'
+                      : d.type === 'inspection' ? '✓'
+                      : '⚙';
+          return `
+          <div class="upnext-item" data-delivery="${d.id}">
+            <div class="upnext-date">
+              <div class="upnext-date-day">${dt.getDate()}</div>
+              <div class="upnext-date-month">${monthShort(dt)}</div>
+            </div>
+            <div class="upnext-icon" style="background:${iconBg};">${glyph}</div>
+            <div class="upnext-info">
+              <div class="upnext-item-title">${d.item}${d.status==='CONFLICT'?' — <span style=\'color:var(--red-500);\'>CONFLICT</span>':''}</div>
+              <div class="upnext-item-sub">${d.time||''} · ${job?job.client:'—'} · ${d.vendor}${d.cost?' · $'+d.cost.toLocaleString():''}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function openPhaseDetail(phaseId, jobId) {
+  const job = STATE.data.jobs.find(j => j.id === jobId);
+  const phase = (STATE.data.jobPhases[jobId] || []).find(p => p.id === phaseId);
+  if (!phase || !job) return;
+  const phaseDeliveries = (STATE.data.deliveries || []).filter(d =>
+    d.jobId === jobId && d.date >= phase.start && d.date <= phase.end
+  );
+  const body = `
+    <div style="margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">${job.client}</div>
+      <div style="font-size:18px;font-weight:700;color:var(--gray-900);margin-top:2px;">${phase.name}</div>
+      <div style="font-size:13px;color:var(--gray-600);margin-top:4px;">${phase.start} → ${phase.end} · ${phase.crew}</div>
+    </div>
+
+    <div style="background:var(--gray-50);border-radius:10px;padding:12px;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Status</div>
+      <span class="eq-status-pill eq-status-${phase.status==='active'?'in-use':phase.status==='done'?'transit':'idle'}" style="font-size:11px;">${phase.status.toUpperCase()}</span>
+    </div>
+
+    ${phaseDeliveries.length ? `
+      <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Required during this phase</div>
+      ${phaseDeliveries.map(d => `
+        <div class="upnext-item" data-delivery="${d.id}" style="border:1px solid var(--gray-200);border-radius:8px;margin-bottom:6px;">
+          <div class="upnext-icon" style="background:${d.status==='CONFLICT'?'var(--red-500)':d.type==='delivery'?'var(--green-500)':d.type==='equipment'?'var(--navy-700)':'#7c3aed'};">${d.status==='CONFLICT'?'!':d.type==='delivery'?'📦':d.type==='equipment'?'🔧':'✓'}</div>
+          <div class="upnext-info">
+            <div class="upnext-item-title">${d.item}</div>
+            <div class="upnext-item-sub">${d.date} ${d.time||''} · ${d.vendor}</div>
+          </div>
+        </div>
+      `).join('')}` : '<div style="color:var(--gray-500);font-size:13px;">No deliveries or equipment booked for this phase.</div>'}
+  `;
+  modal(phase.name, body, null, 'Close');
+  setTimeout(() => {
+    const m = document.querySelector('.modal-overlay');
+    if (!m) return;
+    m.querySelector('[data-confirm]').onclick = () => m.remove();
+    m.querySelectorAll('[data-delivery]').forEach(item => {
+      item.onclick = () => { m.remove(); openDeliveryDetail(item.dataset.delivery); };
+    });
+  }, 30);
+}
+
+function openDeliveryDetail(deliveryId) {
+  const d = (STATE.data.deliveries || []).find(x => x.id === deliveryId);
+  if (!d) return;
+  const job = STATE.data.jobs.find(j => j.id === d.jobId);
+  const isConflict = d.status === 'CONFLICT';
+  const body = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:${isConflict?'var(--red-500)':d.type==='delivery'?'var(--green-500)':d.type==='equipment'?'var(--navy-700)':d.type==='inspection'?'#7c3aed':'var(--amber-500)'};color:white;">${isConflict?'!':d.type==='delivery'?'📦':d.type==='equipment'?'🔧':d.type==='inspection'?'✓':'⚙'}</div>
+      <div style="flex:1;">
+        <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">${d.type}</div>
+        <div style="font-size:17px;font-weight:700;color:var(--gray-900);">${d.item}</div>
+      </div>
+    </div>
+
+    ${isConflict ? `<div class="eq-conflict-banner" style="margin-bottom:12px;">${ICON.alert}<span>${d.note || 'Scheduling conflict — resolve before this date'}</span></div>` : ''}
+
+    <div style="background:var(--gray-50);border-radius:10px;padding:12px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--gray-500);">Date / Time</span>
+        <span style="font-size:13px;font-weight:600;">${d.date} · ${d.time||'TBD'}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--gray-500);">Vendor</span>
+        <span style="font-size:13px;font-weight:600;">${d.vendor}</span>
+      </div>
+      ${job ? `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--gray-500);">Job</span>
+        <span style="font-size:13px;font-weight:600;">${job.client}</span>
+      </div>` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--gray-500);">Status</span>
+        <span class="eq-status-pill eq-status-${d.status==='confirmed'||d.status==='on-site'||d.status==='booked'?'in-use':d.status==='pending'?'idle':d.status==='transit'?'transit':d.status==='in-progress'?'maintenance':'idle'}">${d.status}</span>
+      </div>
+      ${d.cost ? `<div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:var(--gray-500);">Cost</span>
+        <span style="font-size:13px;font-weight:600;">$${d.cost.toLocaleString()}</span>
+      </div>` : ''}
+    </div>
+
+    ${d.note && !isConflict ? `<div style="font-size:13px;color:var(--gray-600);margin-bottom:10px;padding:10px;background:var(--pool-50);border-radius:8px;">${d.note}</div>` : ''}
+
+    <div style="display:flex;gap:8px;">
+      ${d.status === 'pending' ? `<button class="btn-primary" id="confirmBtn" style="flex:1;">Mark Confirmed</button>` : ''}
+      ${isConflict ? `<button class="btn-primary" id="resolveBtn" style="flex:1;background:var(--red-500);">Resolve Conflict</button>` : ''}
+      <button class="btn-secondary" id="rescheduleBtn" style="flex:1;">Reschedule</button>
+    </div>
+  `;
+  modal(d.item, body, null, 'Close');
+  setTimeout(() => {
+    const m = document.querySelector('.modal-overlay');
+    if (!m) return;
+    m.querySelector('[data-confirm]').onclick = () => m.remove();
+
+    const c = m.querySelector('#confirmBtn');
+    if (c) c.onclick = () => { d.status = 'confirmed'; saveState(); m.remove(); toast('Marked as confirmed ✓'); renderApp(); };
+    const r = m.querySelector('#resolveBtn');
+    if (r) r.onclick = () => {
+      // Resolve by bumping conflict marker to a real status
+      d.status = 'booked'; d.note = (d.note||'') + ' · Conflict resolved';
+      // Also clear conflict flag on related equipment if any
+      if (d.eqId) {
+        const eq = STATE.data.equipment.find(e => e.id === d.eqId);
+        if (eq) { eq.conflict = false; eq.conflictNote = null; }
+      }
+      // Also flip the other side of the conflict (the OTHER delivery referencing same eq+date)
+      const other = STATE.data.deliveries.find(x => x.id !== d.id && x.eqId === d.eqId && x.date === d.date && x.status === 'CONFLICT');
+      if (other) { other.status = 'booked'; other.note = (other.note||'') + ' · Conflict resolved'; }
+      saveState(); m.remove(); toast('Conflict resolved ✓'); renderApp();
+    };
+    const re = m.querySelector('#rescheduleBtn');
+    if (re) re.onclick = () => { m.remove(); toast('Reschedule — drag the marker on the roadmap'); };
+  }, 30);
+
+  // Also wire any nested upnext items
+  setTimeout(() => {
+    document.querySelectorAll('.modal-overlay [data-delivery]').forEach(item => {
+      item.onclick = () => {
+        document.querySelector('.modal-overlay').remove();
+        openDeliveryDetail(item.dataset.delivery);
+      };
+    });
+  }, 50);
+}
+
+function renderAlertsModal() {
+  const alerts = STATE.data.alerts;
+  modal('Notifications', `
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      ${alerts.map(a => `
+        <div class="alert-item alert-${a.type}">
+          <div class="alert-icon">${ICON.alert}</div>
+          <div class="alert-content">
+            <div class="alert-title">${a.title}</div>
+            <div class="alert-desc">${a.desc}</div>
+          </div>
+        </div>`).join('')}
+    </div>`, null, 'Close');
+  // Repurpose confirm as close
+  setTimeout(() => {
+    const m = document.querySelector('.modal-overlay');
+    if (m) m.querySelector('[data-confirm]').onclick = () => m.remove();
+  }, 30);
+}
+
+// ============== FIELD VIEW ==============
+function renderFieldView(main) {
+  if (STATE.jobDetail) { renderJobDetail(main); return; }
+
+  const data = STATE.data;
+  const allJobs = data.jobs; // ALL projects visible to field crew
+  const todaysJobs = data.jobs.filter(j => j.scheduledTime); // jobs with a slot today
+  const activeJob  = data.jobs.find(j => j.status === 'onsite');
+  const doneCount  = todaysJobs.filter(j => j.progress === 100).length;
+  const totalCount = todaysJobs.length;
+  const constructionJobs = allJobs.filter(j => j.type === 'construction' || j.type === 'repair');
+  const serviceJobs = allJobs.filter(j => j.type === 'cleaning');
+
+  const view = el(`
+    <div>
+      <div class="field-header">
+        <div class="field-clock">
+          <span class="clock-dot"></span>
+          <span>Clocked in · 7:14</span>
+        </div>
+        <div class="field-greeting">Good morning,</div>
+        <div class="field-name">${STATE.user.name.split(' ')[0]} 👋</div>
+        <div class="field-stats">
+          <div class="field-stat">
+            <div class="field-stat-num">${allJobs.length}</div>
+            <div class="field-stat-label">All projects</div>
+          </div>
+          <div class="field-stat">
+            <div class="field-stat-num">${doneCount}</div>
+            <div class="field-stat-label">Done today</div>
+          </div>
+          <div class="field-stat">
+            <div class="field-stat-num">${constructionJobs.length}</div>
+            <div class="field-stat-label">Builds</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-docs-notice">
+        📄 Tap any project below to view Blueprints & Permits on your phone
+      </div>
+
+      ${activeJob ? `
+      <div class="section-title">Currently on-site</div>
+      <div class="job-card active" data-job="${activeJob.id}">
+        <div class="job-card-header">
+          <span class="job-card-type job-type-${activeJob.type}">${activeJob.type}</span>
+          <span class="job-time">${activeJob.scheduledTime}</span>
+        </div>
+        <div class="job-client">${activeJob.client}</div>
+        <div class="job-address">${ICON.mapPin}<span>${activeJob.address}</span></div>
+        <div class="job-progress">
+          <div class="progress-bar"><div class="progress-fill" style="width:${activeJob.progress}%"></div></div>
+          <div class="progress-text">${activeJob.progress}%</div>
+        </div>
+      </div>
+      ` : ''}
+
+      ${renderMyEquipmentSection()}
+
+      <div class="section-title">All Construction & Repair Projects</div>
+      <div id="constructionList">
+        ${constructionJobs.map(j => {
+          const docCount = (data.jobDocuments && data.jobDocuments[j.id]) ? data.jobDocuments[j.id].length : 0;
+          return `
+          <div class="job-card" data-job="${j.id}">
+            <div class="job-card-header">
+              <span class="job-card-type job-type-${j.type}">${j.type}</span>
+              <span class="job-time">${j.scheduledTime || j.status}</span>
+            </div>
+            <div class="job-client">${j.client}</div>
+            <div class="job-address">${ICON.mapPin}<span>${j.address}</span></div>
+            <div class="job-progress">
+              <div class="progress-bar"><div class="progress-fill" style="width:${j.progress}%"></div></div>
+              <div class="progress-text">${j.progress}% ${docCount ? '· 📄 '+docCount+' docs' : ''}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="section-title" style="margin-top:20px;">Service & Cleaning Jobs</div>
+      <div id="serviceList">
+        ${serviceJobs.map(j => `
+          <div class="job-card" data-job="${j.id}">
+            <div class="job-card-header">
+              <span class="job-card-type job-type-${j.type}">${j.type}</span>
+              <span class="job-time">${j.scheduledTime || j.status}</span>
+            </div>
+            <div class="job-client">${j.client}</div>
+            <div class="job-address">${ICON.mapPin}<span>${j.address}</span></div>
+            <div class="job-progress">
+              <div class="progress-bar"><div class="progress-fill" style="width:${j.progress}%"></div></div>
+              <div class="progress-text">${j.progress}%</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `);
+  main.appendChild(view);
+
+  view.querySelectorAll('.job-card').forEach(c => {
+    c.onclick = () => { STATE.jobDetail = c.dataset.job; renderApp(); };
+  });
+
+  // Equipment check-in/out
+  view.querySelectorAll('.my-eq-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const item = STATE.data.equipment.find(x => x.id === btn.dataset.eq);
+      if (!item) return;
+      const wasChecked = btn.classList.contains('checked-out');
+      if (wasChecked) {
+        toast(`${item.name} checked back in`);
+        btn.textContent = 'Check out';
+        btn.classList.remove('checked-out');
+      } else {
+        toast(`${item.name} checked out to you`);
+        btn.textContent = 'Checked out ✓';
+        btn.classList.add('checked-out');
+      }
+    };
+  });
+}
+
+function renderMyEquipmentSection() {
+  // Equipment assigned to the current user's crew (or pick a sensible default for demo)
+  const user = STATE.user;
+  let crewName = user.crew;
+  if (!crewName) {
+    // PM / office users — show construction A as the default sample
+    crewName = 'Construction A';
+  }
+  const myEq = (STATE.data.equipment || []).filter(e => e.assignedCrew === crewName);
+  if (myEq.length === 0) return '';
+
+  return `
+    <div class="section-title">Equipment assigned to ${crewName} <span class="link">${myEq.length} items</span></div>
+    <div>
+      ${myEq.map(item => `
+        <div class="my-eq-card">
+          <div class="eq-icon-tile ${eqCategoryClass(item)}">${eqEmoji(item)}</div>
+          <div class="my-eq-info">
+            <div class="my-eq-name">${item.name}</div>
+            <div class="my-eq-tag">${item.tag} · ${item.location.split(' — ')[0]}</div>
+          </div>
+          <button class="my-eq-btn checked-out" data-eq="${item.id}">Checked out ✓</button>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderJobDetail(main) {
+  const job = STATE.data.jobs.find(j => j.id === STATE.jobDetail);
+  if (!job) { STATE.jobDetail = null; renderApp(); return; }
+
+  const view = el(`
+    <div>
+      <button class="back-btn" id="backBtn">${ICON.back}<span>Back to schedule</span></button>
+
+      <div class="job-detail-header">
+        <div class="job-card-header">
+          <span class="job-card-type job-type-${job.type}">${job.type}</span>
+          <span class="job-time">${job.scheduledTime || ''}</span>
+        </div>
+        <div class="job-client" style="font-size:18px;">${job.client}</div>
+        <div class="job-address" style="margin-bottom:14px;">${ICON.mapPin}<span>${job.address}</span></div>
+        <div style="font-size:14px;color:var(--gray-700);">${job.service}</div>
+        <div class="job-progress" style="margin-top:14px;">
+          <div class="progress-bar"><div class="progress-fill" style="width:${job.progress}%"></div></div>
+          <div class="progress-text">${job.progress}%</div>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <button class="action-tile" data-act="photo">
+          <div class="action-tile-icon">${ICON.camera}</div>
+          <div class="action-tile-label">Add photo</div>
+          <div class="action-tile-sub">${job.photos || 0} on file</div>
+        </button>
+        <button class="action-tile" data-act="chem">
+          <div class="action-tile-icon">${ICON.flask}</div>
+          <div class="action-tile-label">Chemical log</div>
+          <div class="action-tile-sub">${job.lastReading ? 'pH '+job.lastReading.ph : 'Log reading'}</div>
+        </button>
+        <button class="action-tile" data-act="blueprints">
+          <div class="action-tile-icon" style="background:var(--pool-100);color:var(--pool-500);">📐</div>
+          <div class="action-tile-label">Blueprints</div>
+          <div class="action-tile-sub">${(STATE.data.jobDocuments && STATE.data.jobDocuments[job.id]) ? STATE.data.jobDocuments[job.id].filter(d=>d.type==='blueprint').length + ' plan(s)' : 'View plans'}</div>
+        </button>
+        <button class="action-tile" data-act="permits">
+          <div class="action-tile-icon" style="background:var(--amber-100);color:#92400e;">📋</div>
+          <div class="action-tile-label">Permits</div>
+          <div class="action-tile-sub">${(STATE.data.jobDocuments && STATE.data.jobDocuments[job.id]) ? STATE.data.jobDocuments[job.id].filter(d=>d.type==='permit').length + ' permit(s)' : 'View permits'}</div>
+        </button>
+      </div>
+
+      ${job.checklist ? `
+      <div class="checklist">
+        <div class="checklist-title">Today's checklist</div>
+        ${job.checklist.map(item => `
+          <div class="checklist-item" data-task="${item.id}">
+            <div class="checkbox ${item.done?'checked':''}"></div>
+            <div class="checklist-text ${item.done?'done':''}">${item.text}</div>
+          </div>`).join('')}
+      </div>` : ''}
+
+      <div class="checklist">
+        <div class="checklist-title">Photos (${job.photos || 0})</div>
+        <div class="photo-grid">
+          <div class="photo-thumb photo-add" id="photoAdd">${ICON.camera}</div>
+          ${Array.from({length: Math.min(8, job.photos||0)}).map((_,i)=> `
+            <div class="photo-thumb" style="background:linear-gradient(135deg,#${['2d8653','38a169','48bb78','1a3a2a','d4a574','f5ede0','245a40','c6f6d5'][i%8]} 0%, #${['c6f6d5','1a3a2a','2d8653','48bb78','245a40','d4a574','38a169','f5ede0'][i%8]} 100%);color:white;font-size:11px;">IMG_${(i+1).toString().padStart(2,'0')}</div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `);
+  main.appendChild(view);
+
+  view.querySelector('#backBtn').onclick = () => { STATE.jobDetail = null; renderApp(); };
+
+  // Checklist toggles
+  view.querySelectorAll('.checklist-item').forEach(item => {
+    item.onclick = () => {
+      const taskId = item.dataset.task;
+      const task = job.checklist.find(t => t.id === taskId);
+      task.done = !task.done;
+      // Update job progress
+      const total = job.checklist.length;
+      const done  = job.checklist.filter(t => t.done).length;
+      job.progress = Math.round((done/total) * 100);
+      saveState();
+      toast(task.done ? 'Task complete ✓' : 'Task reopened');
+      renderApp();
+    };
+  });
+
+  // Action tiles
+  view.querySelectorAll('.action-tile').forEach(t => {
+    t.onclick = () => {
+      const act = t.dataset.act;
+      if (act === 'photo') {
+        modal('Add jobsite photo', `
+          <p style="color:var(--gray-600);font-size:14px;margin-bottom:12px;">In the production app this would open your camera. For the demo, this simulates uploading a photo to the job record.</p>
+          <div style="background:var(--gray-50);padding:24px;text-align:center;border-radius:10px;color:var(--gray-500);font-size:13px;">📸 Simulated photo capture</div>
+        `, () => { job.photos = (job.photos||0)+1; saveState(); toast('Photo uploaded'); renderApp(); }, 'Upload');
+      } else if (act === 'chem') {
+        modal('Log water chemistry', `
+          <div class="input-group"><label>pH</label><input type="number" step="0.1" value="7.4" id="ph"></div>
+          <div class="input-group"><label>Free Chlorine (ppm)</label><input type="number" step="0.1" value="2.5" id="cl"></div>
+          <div class="input-group"><label>Alkalinity (ppm)</label><input type="number" value="110" id="alk"></div>
+          <div class="input-group"><label>Cyanuric Acid (ppm)</label><input type="number" value="45" id="cya"></div>
+        `, () => {
+          const ph = parseFloat(document.querySelector('#ph').value);
+          const cl = parseFloat(document.querySelector('#cl').value);
+          const alk= parseFloat(document.querySelector('#alk').value);
+          const cya= parseFloat(document.querySelector('#cya').value);
+          job.lastReading = { ph, cl, alk, cya, tds: 1200 };
+          saveState();
+          toast('Chemistry reading logged');
+          renderApp();
+        }, 'Save reading');
+      } else if (act === 'blueprints') {
+        const docs = (STATE.data.jobDocuments && STATE.data.jobDocuments[job.id]) || [];
+        const blueprints = docs.filter(d => d.type === 'blueprint');
+        const docRows = blueprints.length ? blueprints.map(d => `
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--gray-50);border-radius:10px;margin-bottom:8px;cursor:pointer;" onclick="toast('Opening ${d.name}...')">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--pool-100);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">${d.icon}</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;font-weight:600;color:var(--gray-900);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${d.name}</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">${d.size} · ${d.date}</div>
+            </div>
+            <div style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:100px;background:${d.status==='approved'?'var(--green-100)':d.status==='pending'?'var(--amber-100)':'var(--pool-100)'};color:${d.status==='approved'?'#065f46':d.status==='pending'?'#92400e':'var(--navy-800)'};">${d.status}</div>
+          </div>`).join('') : '<div style="color:var(--gray-500);font-size:13px;text-align:center;padding:20px;">No blueprints on file yet.</div>';
+        modal('📐 Blueprints', `
+          <div style="font-size:12px;color:var(--gray-500);margin-bottom:14px;">Job: <strong>${job.client}</strong> — ${job.address}</div>
+          ${docRows}
+        `, null, 'Close');
+        setTimeout(() => {
+          const m = document.querySelector('.modal-overlay');
+          if (m) m.querySelector('[data-confirm]').onclick = () => m.remove();
+        }, 30);
+      } else if (act === 'permits') {
+        const docs = (STATE.data.jobDocuments && STATE.data.jobDocuments[job.id]) || [];
+        const permits = docs.filter(d => d.type === 'permit');
+        const docRows = permits.length ? permits.map(d => `
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--gray-50);border-radius:10px;margin-bottom:8px;cursor:pointer;" onclick="toast('Opening ${d.name}...')">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--amber-100);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">${d.icon}</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;font-weight:600;color:var(--gray-900);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${d.name}</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">${d.size} · ${d.date}</div>
+            </div>
+            <div style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:100px;background:${d.status==='approved'||d.status==='signed'?'var(--green-100)':d.status==='pending'?'var(--amber-100)':'var(--pool-100)'};color:${d.status==='approved'||d.status==='signed'?'#065f46':d.status==='pending'?'#92400e':'var(--navy-800)'};">${d.status}</div>
+          </div>`).join('') : '<div style="color:var(--gray-500);font-size:13px;text-align:center;padding:20px;">No permits on file yet.</div>';
+        modal('📋 Permits', `
+          <div style="font-size:12px;color:var(--gray-500);margin-bottom:14px;">Job: <strong>${job.client}</strong> — ${job.address}</div>
+          ${docRows}
+        `, null, 'Close');
+        setTimeout(() => {
+          const m = document.querySelector('.modal-overlay');
+          if (m) m.querySelector('[data-confirm]').onclick = () => m.remove();
+        }, 30);
+      }
+    };
+  });
+
+  view.querySelector('#photoAdd').onclick = () => {
+    job.photos = (job.photos||0)+1; saveState(); toast('Photo uploaded'); renderApp();
+  };
+}
+
+// ============== OFFICE VIEW ==============
+function renderOfficeView(main) {
+  const data = STATE.data;
+  const k = data.kpis;
+
+  const view = el(`
+    <div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Jobs Today</div>
+          <div class="kpi-value">${k.jobsToday.value}</div>
+          <div class="kpi-delta delta-${k.jobsToday.dir==='up'?'up':'down'}">${ICON.arrowUp}<span>${k.jobsToday.delta} vs yesterday</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Crews</div>
+          <div class="kpi-value">${k.activeCrews.value}<span style="font-size:14px;color:var(--gray-400);font-weight:500;"> / 5</span></div>
+          <div class="kpi-delta" style="color:var(--gray-500);">All on schedule</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Revenue (Week)</div>
+          <div class="kpi-value">${k.revenueWeek.value}</div>
+          <div class="kpi-delta delta-up">${ICON.arrowUp}<span>${k.revenueWeek.delta} vs last week</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">On-Time Rate</div>
+          <div class="kpi-value">${k.onTimeRate.value}</div>
+          <div class="kpi-delta delta-up">${ICON.arrowUp}<span>${k.onTimeRate.delta}</span></div>
+        </div>
+      </div>
+
+      <div class="office-grid">
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Live Job Map</div>
+              <span class="panel-action">View full map</span>
+            </div>
+            <div class="map-wrap">
+              <div class="map-grid-lines"></div>
+              ${data.jobs.filter(j=>j.lat).map(j => `
+                <div class="map-pin ${j.type}" style="left:${j.lng}%; top:${j.lat}%;" title="${j.client}" data-job="${j.id}">
+                  <span>${j.type==='construction'?'🏗':j.type==='cleaning'?'💧':'🔧'}</span>
+                </div>`).join('')}
+              ${(data.equipment||[]).filter(e=>e.status==='in-use'||e.status==='transit').map(e => `
+                <div class="map-pin equipment-pin" style="left:${e.lng+3}%; top:${e.lat-3}%;" title="${e.name} · ${e.tag}" data-eq="${e.id}">
+                  <span>${eqEmoji(e)}</span>
+                </div>`).join('')}
+              <div class="map-legend">
+                <div class="map-legend-row"><span class="legend-dot" style="background:var(--sand-500);"></span> Construction</div>
+                <div class="map-legend-row"><span class="legend-dot" style="background:var(--green-500);"></span> Cleaning</div>
+                <div class="map-legend-row"><span class="legend-dot" style="background:var(--pool-500);"></span> Repair</div>
+                <div class="map-legend-row"><span class="legend-dot" style="background:var(--navy-700);border-radius:3px;"></span> Equipment</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Today's Dispatch</div>
+              <span class="panel-action">+ New Job</span>
+            </div>
+            <div>
+              ${data.jobs.filter(j=>j.scheduledTime).map(j => `
+                <div class="dispatch-row" data-job="${j.id}">
+                  <div class="dispatch-time">${j.scheduledTime.replace(/\s/g,'')}</div>
+                  <div class="dispatch-info">
+                    <div class="dispatch-client">${j.client}</div>
+                    <div class="dispatch-meta">
+                      <span class="job-card-type job-type-${j.type}" style="font-size:10px;padding:1px 6px;">${j.type}</span>
+                      <span>${j.crew}</span>
+                    </div>
+                  </div>
+                  <div class="dispatch-status status-${j.status}">${j.status}</div>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          ${renderEquipmentPanel()}
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Inventory — Low Stock</div>
+              <span class="panel-action">Reorder all</span>
+            </div>
+            <div class="inv-list">
+              ${data.inventory.filter(i => i.status !== 'ok').map(i => `
+                <div class="inv-item">
+                  <div class="inv-icon" style="${i.status==='critical'?'background:var(--red-100);color:var(--red-500);':'background:var(--amber-100);color:var(--amber-500);'}">${ICON.package}</div>
+                  <div class="inv-info">
+                    <div class="inv-name">${i.name}</div>
+                    <div class="inv-meta">${i.qty} ${i.unit} · min ${i.min} ${i.unit}</div>
+                    <div class="inv-bar"><div class="inv-bar-fill inv-bar-${i.status==='critical'?'crit':'low'}" style="width:${Math.min(100,(i.qty/i.min)*100)}%"></div></div>
+                  </div>
+                  <button class="btn-primary" style="padding:8px 14px;font-size:12px;" data-reorder="${i.id}">Reorder</button>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Crew Status</div>
+              <span class="panel-action">Manage</span>
+            </div>
+            <div>
+              ${data.crews.map(c => `
+                <div class="crew-row">
+                  <div class="crew-avatar">${c.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
+                  <div class="crew-info">
+                    <div class="crew-name">${c.name}</div>
+                    <div class="crew-job">${c.members.join(', ')}</div>
+                  </div>
+                  <div class="crew-status-dot crew-${c.status}"></div>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Alerts</div>
+              <span class="panel-action">Clear all</span>
+            </div>
+            <div>
+              ${data.alerts.map(a => `
+                <div class="alert-item alert-${a.type}">
+                  <div class="alert-icon">${ICON.alert}</div>
+                  <div class="alert-content">
+                    <div class="alert-title">${a.title}</div>
+                    <div class="alert-desc">${a.desc}</div>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Messages</div>
+              <span class="panel-action">Inbox</span>
+            </div>
+            <div>
+              ${data.messages.map(m => `
+                <div class="msg-thread">
+                  <div class="msg-avatar">${m.initials}</div>
+                  <div class="msg-content">
+                    <div class="msg-header-row">
+                      <div class="msg-name">${m.from}</div>
+                      <div class="msg-time">${m.time}</div>
+                    </div>
+                    <div class="msg-preview">${m.preview}</div>
+                  </div>
+                  ${m.unread?'<div class="msg-unread"></div>':''}
+                </div>`).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Invoicing Queue</div>
+              <span class="panel-action">View all</span>
+            </div>
+            <div>
+              <div class="dispatch-row">
+                <div class="dispatch-time" style="background:var(--green-100);color:#065f46;">SEND</div>
+                <div class="dispatch-info">
+                  <div class="dispatch-client">Hendersons — Gunite Milestone</div>
+                  <div class="dispatch-meta">$18,750 · Progress invoice</div>
+                </div>
+                <button class="btn-primary" style="padding:8px 14px;font-size:12px;" id="sendInv1">Send</button>
+              </div>
+              <div class="dispatch-row">
+                <div class="dispatch-time" style="background:var(--gray-100);">DRAFT</div>
+                <div class="dispatch-info">
+                  <div class="dispatch-client">Sunset Villas HOA — May Service</div>
+                  <div class="dispatch-meta">$1,920 · Monthly billing</div>
+                </div>
+                <button class="btn-secondary" style="padding:8px 14px;font-size:12px;">Edit</button>
+              </div>
+              <div class="dispatch-row">
+                <div class="dispatch-time" style="background:var(--gray-100);">DRAFT</div>
+                <div class="dispatch-info">
+                  <div class="dispatch-client">Liu Estate — Pump Replacement</div>
+                  <div class="dispatch-meta">$2,850 · Final invoice</div>
+                </div>
+                <button class="btn-secondary" style="padding:8px 14px;font-size:12px;">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+  main.appendChild(view);
+
+  // Dispatch row clicks → job detail (switch to field view)
+  view.querySelectorAll('.dispatch-row[data-job]').forEach(r => {
+    r.onclick = () => {
+      STATE.view = 'field';
+      STATE.jobDetail = r.dataset.job;
+      renderApp();
+    };
+  });
+
+  // Wire up-next item clicks to the delivery detail modal
+  view.querySelectorAll('[data-delivery]').forEach(item => {
+    item.onclick = (e) => { e.stopPropagation(); openDeliveryDetail(item.dataset.delivery); };
+  });
+  view.querySelectorAll('.map-pin').forEach(p => {
+    p.onclick = (ev) => {
+      ev.stopPropagation();
+      if (p.dataset.eq) { openEquipmentDetail(p.dataset.eq); return; }
+      const j = STATE.data.jobs.find(x => x.id === p.dataset.job);
+      if (!j) return;
+      modal(j.client, `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span class="job-card-type job-type-${j.type}">${j.type}</span>
+          <span style="font-size:13px;color:var(--gray-500);">${j.scheduledTime || ''}</span>
+        </div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">${j.service}</div>
+        <div style="font-size:13px;color:var(--gray-500);margin-bottom:12px;">${j.address}</div>
+        <div style="font-size:13px;">Crew: <strong>${j.crew}</strong></div>
+        <div style="font-size:13px;">Progress: <strong>${j.progress}%</strong></div>
+      `, () => { STATE.view='field'; STATE.jobDetail=j.id; renderApp(); }, 'Open job');
+    };
+  });
+  view.querySelectorAll('[data-reorder]').forEach(b => {
+    b.onclick = (e) => { e.stopPropagation(); toast('Reorder draft created'); };
+  });
+  const inv1 = view.querySelector('#sendInv1');
+  if (inv1) inv1.onclick = () => toast('Invoice sent to Hendersons ✓');
+
+  wireEquipmentPanel(view);
+}
+
+// ============== EQUIPMENT PANEL (Office view) ==============
+function renderEquipmentPanel() {
+  const eq = STATE.data.equipment || [];
+  const total = eq.length;
+  const inUse = eq.filter(e => e.status === 'in-use' || e.status === 'transit').length;
+  const idle  = eq.filter(e => e.status === 'idle').length;
+  const maint = eq.filter(e => e.status === 'maintenance').length;
+  const conflicts = eq.filter(e => e.conflict).length;
+  const filter = STATE.eqFilter || 'all';
+
+  const filtered = eq.filter(e => {
+    if (filter === 'all') return true;
+    if (filter === 'conflicts') return e.conflict;
+    if (filter === 'service') return e.hoursToService <= 30 || e.status === 'maintenance';
+    return e.status === filter;
+  });
+
+  return `
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Equipment & Machinery</div>
+        <span class="panel-action" id="addEq">+ Add</span>
+      </div>
+
+      <div class="eq-summary-row">
+        <div class="eq-summary-card">
+          <div class="eq-summary-num">${inUse}</div>
+          <div class="eq-summary-label">In Use</div>
+        </div>
+        <div class="eq-summary-card">
+          <div class="eq-summary-num">${idle}</div>
+          <div class="eq-summary-label">Idle</div>
+        </div>
+        <div class="eq-summary-card ${maint?'warn':''}">
+          <div class="eq-summary-num">${maint}</div>
+          <div class="eq-summary-label">Service</div>
+        </div>
+        <div class="eq-summary-card ${conflicts?'alert':''}">
+          <div class="eq-summary-num">${conflicts}</div>
+          <div class="eq-summary-label">Conflicts</div>
+        </div>
+      </div>
+
+      <div class="eq-filter-row">
+        <button class="eq-filter-chip ${filter==='all'?'active':''}"        data-eqfilter="all">All (${total})</button>
+        <button class="eq-filter-chip ${filter==='in-use'?'active':''}"     data-eqfilter="in-use">In Use</button>
+        <button class="eq-filter-chip ${filter==='idle'?'active':''}"       data-eqfilter="idle">Idle / Yard</button>
+        <button class="eq-filter-chip ${filter==='transit'?'active':''}"    data-eqfilter="transit">In Transit</button>
+        <button class="eq-filter-chip ${filter==='service'?'active':''}"    data-eqfilter="service">Service Due</button>
+        ${conflicts?`<button class="eq-filter-chip ${filter==='conflicts'?'active':''}" data-eqfilter="conflicts" style="background:var(--red-100);color:#991b1b;">⚠ Conflicts (${conflicts})</button>`:''}
+      </div>
+
+      <div class="eq-list" id="eqList">
+        ${filtered.length ? filtered.map(item => renderEquipmentCard(item)).join('') :
+          '<div class="empty-state">No equipment matches this filter.</div>'}
+      </div>
+    </div>`;
+}
+
+function renderEquipmentCard(item) {
+  const svcPct = Math.max(0, Math.min(100, ((250 - Math.min(250, item.hoursToService)) / 250) * 100));
+  return `
+    <div class="eq-card ${item.conflict?'has-conflict':''}" data-eq="${item.id}">
+      <div class="eq-card-top">
+        <div class="eq-icon-tile ${eqCategoryClass(item)}">${eqEmoji(item)}</div>
+        <div class="eq-info">
+          <div class="eq-name">${item.name}</div>
+          <div class="eq-model">${item.model}</div>
+          <span class="eq-tag">${item.tag}</span>
+        </div>
+        <div class="eq-status-pill eq-status-${item.status}">${item.status.replace('-',' ')}</div>
+      </div>
+
+      <div class="eq-detail-row">${ICON.mapPin}<span>Currently at <strong>${item.location}</strong></span></div>
+      ${item.assignedCrew ? `<div class="eq-detail-row">${ICON.user}<span>Assigned to <strong>${item.assignedCrew}</strong></span></div>` : ''}
+      <div class="eq-detail-row">${ICON.clock}<span>Since ${item.since.split(' ')[1]} · ${item.hoursLogged} total hrs</span></div>
+
+      ${item.conflict ? `<div class="eq-conflict-banner">${ICON.alert}<span>Scheduling conflict: ${item.conflictNote}</span></div>` : ''}
+      ${item.status === 'maintenance' ? `<div class="eq-service-banner">${ICON.wrench}<span>${item.serviceNote || 'In service'}</span></div>` : ''}
+      ${(item.hoursToService <= 30 && item.status !== 'maintenance') ? `<div class="eq-service-banner">${ICON.wrench}<span>Service due in ${item.hoursToService} hrs</span></div>` : ''}
+
+      ${item.nextAssignment ? `
+        <div class="eq-next-block">
+          <div class="eq-next-label">Next Needed</div>
+          <div class="eq-next-job">${item.nextAssignment.client}</div>
+          <div class="eq-next-meta">${item.nextAssignment.date} · ${item.nextAssignment.need}</div>
+        </div>` : ''}
+    </div>`;
+}
+
+function wireEquipmentPanel(view) {
+  // Filter chips
+  view.querySelectorAll('[data-eqfilter]').forEach(chip => {
+    chip.onclick = (e) => {
+      e.stopPropagation();
+      STATE.eqFilter = chip.dataset.eqfilter;
+      renderApp();
+    };
+  });
+
+  // Equipment card click → detail modal
+  view.querySelectorAll('.eq-card').forEach(card => {
+    card.onclick = () => openEquipmentDetail(card.dataset.eq);
+  });
+
+  const addBtn = view.querySelector('#addEq');
+  if (addBtn) addBtn.onclick = (e) => { e.stopPropagation(); toast('Add equipment — coming soon'); };
+}
+
+function openEquipmentDetail(eqId) {
+  const item = STATE.data.equipment.find(e => e.id === eqId);
+  if (!item) return;
+  const jobLink = item.assignedJob ? STATE.data.jobs.find(j => j.id === item.assignedJob) : null;
+
+  const body = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div class="eq-icon-tile ${eqCategoryClass(item)}" style="width:56px;height:56px;font-size:28px;">${eqEmoji(item)}</div>
+      <div style="flex:1;">
+        <div style="font-size:17px;font-weight:700;color:var(--gray-900);">${item.name}</div>
+        <div style="font-size:13px;color:var(--gray-500);">${item.model} · ${item.tag}</div>
+      </div>
+      <div class="eq-status-pill eq-status-${item.status}">${item.status.replace('-',' ')}</div>
+    </div>
+
+    <div style="background:var(--gray-50);border-radius:10px;padding:12px;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Where it is now</div>
+      <div style="font-size:14px;font-weight:600;">${item.location}</div>
+      ${item.assignedCrew ? `<div style="font-size:12px;color:var(--gray-500);margin-top:4px;">Crew: ${item.assignedCrew}${jobLink?' · Job: '+jobLink.client:''}</div>` : ''}
+      <div style="font-size:12px;color:var(--gray-500);margin-top:4px;">Since: ${item.since}</div>
+    </div>
+
+    ${item.nextAssignment ? `
+    <div style="background:var(--pool-50);border-radius:10px;padding:12px;margin-bottom:12px;border-left:3px solid var(--pool-400);">
+      <div style="font-size:11px;font-weight:700;color:var(--pool-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Where it's needed next</div>
+      <div style="font-size:14px;font-weight:600;">${item.nextAssignment.client}</div>
+      <div style="font-size:12px;color:var(--gray-600);margin-top:4px;">${item.nextAssignment.date} · ${item.nextAssignment.need}</div>
+    </div>` : ''}
+
+    ${item.conflict ? `
+    <div class="eq-conflict-banner" style="margin-bottom:12px;">${ICON.alert}<span>Scheduling conflict: ${item.conflictNote}</span></div>` : ''}
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px;">
+      <div style="background:var(--gray-50);border-radius:10px;padding:12px;">
+        <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">Hours Logged</div>
+        <div style="font-size:18px;font-weight:700;margin-top:2px;">${item.hoursLogged}</div>
+      </div>
+      <div style="background:var(--gray-50);border-radius:10px;padding:12px;">
+        <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">Next Service In</div>
+        <div style="font-size:18px;font-weight:700;margin-top:2px;${item.hoursToService<=30?'color:var(--amber-500);':''}">${item.hoursToService} hrs</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;">
+      <button class="btn-secondary" id="eqMove" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">${ICON.move}<span>Reassign</span></button>
+      <button class="btn-secondary" id="eqSchedule" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">${ICON.calendar}<span>Schedule</span></button>
+      <button class="btn-secondary" id="eqService" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">${ICON.wrench}<span>Service</span></button>
+    </div>`;
+
+  modal(item.name, body, null, 'Close');
+  setTimeout(() => {
+    const m = document.querySelector('.modal-overlay');
+    if (!m) return;
+    m.querySelector('[data-confirm]').onclick = () => m.remove();
+
+    const moveBtn = m.querySelector('#eqMove');
+    if (moveBtn) moveBtn.onclick = () => {
+      m.remove();
+      openReassignModal(item);
+    };
+    const schedBtn = m.querySelector('#eqSchedule');
+    if (schedBtn) schedBtn.onclick = () => { m.remove(); toast('Schedule view — coming soon'); };
+    const svcBtn = m.querySelector('#eqService');
+    if (svcBtn) svcBtn.onclick = () => {
+      item.status = 'maintenance';
+      item.location = 'Service Bay — Main Yard';
+      item.serviceNote = 'Sent to service bay';
+      item.assignedJob = null;
+      item.assignedCrew = null;
+      saveState();
+      m.remove();
+      toast(`${item.name} sent to service bay`);
+      renderApp();
+    };
+  }, 30);
+}
+
+function openReassignModal(item) {
+  const jobOptions = STATE.data.jobs.filter(j => j.status !== 'complete')
+    .map(j => `<option value="${j.id}">${j.client} — ${j.service}</option>`).join('');
+  const body = `
+    <p style="color:var(--gray-600);font-size:13px;margin-bottom:12px;">Reassign <strong>${item.name}</strong> (${item.tag}) to a different job. The current crew will get a notification.</p>
+    <div class="input-group">
+      <label>New Job Assignment</label>
+      <select id="newJob" style="width:100%;padding:10px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;">
+        <option value="">— Send to Main Yard —</option>
+        ${jobOptions}
+      </select>
+    </div>
+    <div class="input-group">
+      <label>Reason (optional)</label>
+      <input type="text" id="reason" placeholder="e.g., crew finished early" />
+    </div>`;
+  modal('Reassign Equipment', body, () => {
+    const newJobId = document.querySelector('#newJob').value;
+    if (newJobId) {
+      const job = STATE.data.jobs.find(j => j.id === newJobId);
+      item.assignedJob = job.id;
+      item.assignedCrew = job.crew;
+      item.location = `${job.client} — ${job.address}`;
+      item.lat = job.lat; item.lng = job.lng;
+      item.status = 'transit';
+      item.since = new Date().toISOString().slice(0,16).replace('T',' ');
+      item.conflict = false; item.conflictNote = null;
+      toast(`${item.name} reassigned to ${job.client}`);
+    } else {
+      item.assignedJob = null;
+      item.assignedCrew = null;
+      item.location = 'Main Yard';
+      item.lat = 50; item.lng = 50;
+      item.status = 'idle';
+      item.since = new Date().toISOString().slice(0,16).replace('T',' ');
+      toast(`${item.name} returned to yard`);
+    }
+    saveState();
+    renderApp();
+  }, 'Reassign');
+}
+
+// ============== CLIENT VIEW ==============
+function renderClientView(main) {
+  const job = STATE.data.jobs.find(j => j.id === 'j1'); // Henderson construction
+  const pms = SEED.projectManagers;
+  const myPm = pms[0]; // Jose Garcia as primary PM
+  const backupPm = pms[1]; // Marcus Reyes as backup PM
+  const owner = pms[2]; // David Palmer as owner/escalation
+
+  const view = el(`
+    <div>
+      <div class="client-hero">
+        <div class="client-hero-label">🌴 Palm Pool & Spa — Your Project</div>
+        <div class="client-hero-name">The Hendersons — New Build</div>
+        <div class="client-progress">
+          <div class="client-progress-label">
+            <span>Overall progress</span>
+            <span><strong>${job.progress}%</strong> · On schedule</span>
+          </div>
+          <div class="client-progress-bar">
+            <div class="client-progress-fill" style="width:${job.progress}%"></div>
+          </div>
+          <div class="client-next">📅 Next milestone: <strong>Gunite Shell</strong> — Tuesday, June 16</div>
+        </div>
+      </div>
+
+      <div class="contact-bar" style="flex-direction:column;gap:12px;">
+        <div style="display:flex;gap:10px;">
+          <button class="contact-btn" id="msgPm" style="flex:1;">${ICON.message}<span>Message PM</span></button>
+          <button class="contact-btn" id="payInv" style="flex:1;">${ICON.invoice}<span>Pay Invoice</span></button>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;padding:0 2px;">
+          Call Your Project Manager
+        </div>
+        <div id="pmContactList">
+          <div class="pm-contact-card" data-pm="pm1" style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--pool-50);border:1.5px solid var(--pool-100);border-radius:12px;margin-bottom:8px;cursor:pointer;">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--pool-400);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;">${myPm.initials}</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;color:var(--gray-900);">${myPm.name}</div>
+              <div style="font-size:11px;font-weight:600;color:var(--pool-500);text-transform:uppercase;letter-spacing:0.5px;">Your PM</div>
+              <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">${myPm.phone}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--green-500);margin-bottom:2px;" title="On-site today"></div>
+              <button class="btn-primary" style="padding:8px 14px;font-size:12px;border-radius:8px;" onclick="event.stopPropagation();toast('Calling ${myPm.name}...')">📞 Call</button>
+            </div>
+          </div>
+
+          <div class="pm-contact-card" data-pm="pm2" style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;margin-bottom:8px;cursor:pointer;">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--navy-700);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;">${backupPm.initials}</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;color:var(--gray-900);">${backupPm.name}</div>
+              <div style="font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">Backup PM</div>
+              <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">${backupPm.phone}</div>
+            </div>
+            <button class="btn-secondary" style="padding:8px 14px;font-size:12px;border-radius:8px;" onclick="event.stopPropagation();toast('Calling ${backupPm.name}...')">📞 Call</button>
+          </div>
+
+          <div class="pm-contact-card" data-pm="pm3" style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;cursor:pointer;">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--sand-500);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;">${owner.initials}</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;color:var(--gray-900);">${owner.name}</div>
+              <div style="font-size:11px;font-weight:600;color:var(--sand-500);text-transform:uppercase;letter-spacing:0.5px;">Owner · Escalation</div>
+              <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">${owner.phone}</div>
+            </div>
+            <button class="btn-secondary" style="padding:8px 14px;font-size:12px;border-radius:8px;" onclick="event.stopPropagation();toast('Calling ${owner.name} (Owner)...')">📞 Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:20px;">Project Timeline</div>
+      <div class="milestone-timeline">
+        ${job.milestones.map(m => `
+          <div class="milestone ${m.done?'done':''} ${m.current?'current':''}">
+            <div class="milestone-dot"></div>
+            <div class="milestone-content">
+              <div class="milestone-title">${m.title}</div>
+              <div class="milestone-date">${m.date}</div>
+              <div class="milestone-desc">${m.desc || ''}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="section-title">Updates from your team</div>
+      ${job.updates.map(u => `
+        <div class="update-card">
+          <div class="update-header">
+            <div class="update-avatar">${u.initials}</div>
+            <div class="update-meta">
+              <div class="update-author">${u.author}</div>
+              <div class="update-time">${u.time}</div>
+            </div>
+          </div>
+          <div class="update-message">${u.message}</div>
+        </div>
+      `).join('')}
+
+      <div class="section-title">Recent Photos (${job.photos})</div>
+      <div class="photo-grid" style="grid-template-columns:repeat(4,1fr);">
+        ${Array.from({length: 8}).map((_,i)=> `
+          <div class="photo-thumb" style="background:linear-gradient(135deg,#${['2d8653','38a169','48bb78','1a3a2a','d4a574','f5ede0','245a40','c6f6d5'][i%8]} 0%, #${['c6f6d5','1a3a2a','2d8653','48bb78','245a40','d4a574','38a169','f5ede0'][i%8]} 100%);color:white;font-size:10px;">IMG_${(i+1).toString().padStart(2,'0')}</div>
+        `).join('')}
+      </div>
+
+      <div style="padding: 20px 0 40px; text-align: center; color: var(--gray-400); font-size: 12px;">
+        🌴 Palm Pool & Spa Client Portal · You'll receive a text update for each new milestone.
+      </div>
+    </div>
+  `);
+  main.appendChild(view);
+
+  view.querySelector('#msgPm').onclick = () => {
+    modal('Message your PM', `
+      <p style="color:var(--gray-600);font-size:13px;margin-bottom:10px;">Send a message to <strong>Jose Garcia</strong>, your Project Manager.</p>
+      <textarea rows="4" style="width:100%;padding:10px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;" placeholder="Type your message..."></textarea>
+    `, () => toast('Message sent to Jose Garcia ✓'), 'Send');
+  };
+  view.querySelector('#payInv').onclick = () => modal('Pay Invoice', `
+    <div style="background:var(--gray-50);padding:16px;border-radius:10px;margin-bottom:12px;">
+      <div style="font-size:13px;color:var(--gray-500);">Progress Invoice · Gunite Milestone</div>
+      <div style="font-size:24px;font-weight:800;color:var(--gray-900);margin:4px 0;">$18,750.00</div>
+      <div style="font-size:12px;color:var(--gray-500);">Due: June 22, 2026</div>
+    </div>
+    <p style="font-size:13px;color:var(--gray-600);">Demo: tap "Pay" to simulate payment.</p>
+  `, () => toast('Payment received ✓ Thank you!'), 'Pay now');
+}
+
+// ============== BOOT ==============
+loadState();
+const savedUser = localStorage.getItem('palmpool_user');
+if (savedUser) {
+  try {
+    STATE.user = JSON.parse(savedUser);
+    if (STATE.user.role === 'crew') STATE.view = 'field';
+    else if (STATE.user.role === 'client') STATE.view = 'client';
+    else if (STATE.user.role === 'pm') STATE.view = 'roadmap';
+    else STATE.view = 'office';
+    renderApp();
+  } catch(e) { renderLogin(); }
+} else {
+  renderLogin();
+}
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
