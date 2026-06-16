@@ -11,5 +11,4 @@ export default defineConfig({
       entry: 'src/index.tsx'
     })
   ],
-  assetsInclude: ['**/*.html'],
 })
